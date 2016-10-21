@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TowerBean">
+
+    <typeAlias alias="towerBean" type="com.linekong.dao.sql.logic.tower.TowerBean"/>
+
+    <typeAlias alias="towerRankBean" type="com.linekong.dao.sql.logic.tower.TowerRankBean"/>
+
+    <insert id="addTowerBean" parameterClass="towerBean">
+		INSERT INTO
+		t_game_role_tower
+		(roleId,historyStar,curStar,curUsableStar,curStageId,state,historyStageStars,curStageStars,attrFixPercents,perferPassStages,disCountRefId,attriFixMenus,historyTopLocal,towerTopStageId)
+		VALUES
+		(#roleId#,#historyStar#,#curStar#,#curUsableStar#,#curStageId#,#state#,#historyStageStars#,#curStageStars#,#attrFixPercents#,#perferPassStages#,#disCountRefId#,#attriFixMenus#,#historyTopLocal#,#towerTopStageId#)
+	</insert>
+
+    <update id="updateTowerBean" parameterClass="towerBean">
+		UPDATE
+		t_game_role_tower
+		SET roleId = #roleId#, historyStar = #historyStar#, curStar = #curStar#, curUsableStar = #curUsableStar#,
+		curStageId = #curStageId#, state = #state#, historyStageStars = #historyStageStars#, curStageStars = #curStageStars#, attrFixPercents = #attrFixPercents#, perferPassStages = #perferPassStages#, disCountRefId = #disCountRefId#,
+		attriFixMenus = #attriFixMenus#, historyTopLocal = #historyTopLocal#, towerTopStageId = #towerTopStageId#
+		WHERE
+		roleId=#roleId#
+	</update>
+
+    <select id="getTowerBean" parameterClass="long" resultClass="towerBean">
+		<![CDATA[
+		SELECT roleId AS roleId, historyStar AS historyStar, curStar AS curStar, curUsableStar AS curUsableStar, curStageId AS curStageId, state AS state,
+		historyStageStars AS historyStageStars, curStageStars AS curStageStars, attrFixPercents AS attrFixPercents, perferPassStages AS perferPassStages, disCountRefId AS disCountRefId, attriFixMenus AS attriFixMenus,
+		historyTopLocal AS historyTopLocal, towerTopStageId AS towerTopStageId
+		FROM t_game_role_tower WHERE roleId = #roleId#
+
+        ]]>
+	</select>
+
+
+    <select id="getTowerDescList" parameterClass="int" resultClass="towerRankBean">
+		<![CDATA[
+
+		SELECT roleId AS roleId, historyStar AS historyStar
+		FROM t_game_role_tower ORDER BY historyStar DESC LIMIT #limit#
+
+        ]]>
+	</select>
+</sqlMap>

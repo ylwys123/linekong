@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PracticeBean">
+
+    <typeAlias alias="practiceBean" type="com.linekong.dao.sql.log.practice.PracticeBean" />
+
+    <insert id="addPracticeBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_practice(userId, roleId, roleLevel, logDateTime, intParam1, strParam1, intParam2, strParam2, intParam3, costMirror, mainCardQualityChange, beforeFloor, afterFloor, mainCardRefIdChange, beforeFightNum, afterFightNum)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].roleLevel#, #[].logDateTime#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].intParam3#, #[].costMirror#, #[].mainCardQualityChange#, #[].beforeFloor#, #[].afterFloor#, #[].mainCardRefIdChange#, #[].beforeFightNum#, #[].afterFightNum#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getPracticeBean" parameterClass="long" resultClass="practiceBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, logDateTime AS logDateTime, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3, costMirror AS costMirror, mainCardQualityChange AS mainCardQualityChange, beforeFloor AS beforeFloor, afterFloor AS afterFloor, mainCardRefIdChange AS mainCardRefIdChange, beforeFightNum AS beforeFightNum, afterFightNum AS afterFightNum
+        FROM  
+        t_log_practice
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+</sqlMap>

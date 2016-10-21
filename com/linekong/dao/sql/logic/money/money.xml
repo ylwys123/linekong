@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MoneyBean">
+
+    <typeAlias alias="moneyBean" type="com.linekong.dao.sql.log.money.MoneyBean" />
+
+    <insert id="addMoneyBean" parameterClass="moneyBean">
+        INSERT INTO
+        t_log_money
+        (id, userId, roleId, logDateTime, playType, changeNum, oldNum, newNum, roleLevel)
+        VALUES
+        (#id#, #userId#, #roleId#, #logDateTime#, #playType#, #changeNum#, #oldNum#, #newNum#, #roleLevel#)
+        <selectKey resultClass="long" keyProperty="id">
+            SELECT @@IDENTITY AS id
+        </selectKey>
+    </insert>
+
+    <select id="getMoneyBean" parameterClass="long" resultClass="moneyBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, playType AS playType, changeNum AS changeNum, oldNum AS oldNum, newNum AS newNum, roleLevel AS roleLevel
+        FROM
+        t_log_money
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getMoneyBeanList" parameterClass="java.util.Map" resultClass="moneyBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, playType AS playType, changeNum AS changeNum, oldNum AS oldNum, newNum AS newNum, roleLevel AS roleLevel
+        FROM
+        t_log_money
+        WHERE
+         roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time# AND playType = #op_type#
+		LIMIT #offSet# , #perPageCount#
+        ]]>
+    </select>
+
+</sqlMap>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleSpecialShopBean">
+
+	<typeAlias alias="roleSpecialShopBean" type="com.linekong.dao.sql.logic.specialshop.RoleSpecialShopBean"/>
+
+	<insert id="addRoleSpecialShopBean" parameterClass="roleSpecialShopBean">
+		INSERT INTO t_game_role_shop_special(
+			roleId, tab, lastFreeRefreshTime, costRefreshTimes, shopGoodsInfo, leveRefreshRecord
+		)VALUES(
+			#roleId#, #tab#, #lastFreeRefreshTime#, #costRefreshTimes#, #shopGoodsInfo#, #leveRefreshRecord#
+		)
+	</insert>
+
+	<select id="getRoleSpecialShopBean" resultClass="roleSpecialShopBean" parameterClass="long">
+		SELECT
+			roleId AS roleId,tab AS tab,
+			lastFreeRefreshTime AS lastFreeRefreshTime,costRefreshTimes AS costRefreshTimes,shopGoodsInfo AS shopGoodsInfo, leveRefreshRecord AS leveRefreshRecord
+		FROM t_game_role_shop_special 
+		WHERE roleId = #value#
+	</select>
+
+	<update id="updateRoleSpecialShopBean" parameterClass="roleSpecialShopBean">
+		UPDATE t_game_role_shop_special
+		SET
+			lastFreeRefreshTime = #lastFreeRefreshTime#,costRefreshTimes = #costRefreshTimes#,shopGoodsInfo = #shopGoodsInfo#, leveRefreshRecord = #leveRefreshRecord#
+		WHERE roleId = #roleId# AND tab=#tab#
+	</update>
+</sqlMap>

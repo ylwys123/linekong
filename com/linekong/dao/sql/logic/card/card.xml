@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CardBean">
+
+	<typeAlias alias="cardBean" type="com.linekong.dao.sql.logic.card.CardBean" />
+
+	<insert id="addCardBean" parameterClass="cardBean">
+	    INSERT INTO 
+		t_game_role_card 
+		(PKId,gameAreaId,roleId,positionId,rangedId,level,advancedLevel,quality,exp,cardRefId,costMoney,costFostBolus,costAdvancedBolus,costAdvanceCards,costDestinyStone,costWakeUpBolus,costWakeUpCards,costWakeUpMoney)
+		VALUES 
+		(#PKId#,#gameAreaId#,#roleId#,#positionId#,#rangedId#,#level#,#advancedLevel#,#quality#,#exp#,#cardRefId#,#costMoney#,#costFostBolus#,#costAdvancedBolus#,#costAdvanceCards#,#costDestinyStone#,#costWakeUpBolus#,#costWakeUpCards#,#costWakeUpMoney#)
+	</insert>
+
+	<select id="getCardBeanList" parameterClass="long" resultClass="cardBean">
+		SELECT 
+		PKId AS PKId, gameAreaId AS gameAreaId, roleId AS roleId, positionId AS positionId, rangedId AS rangedId, level AS level, advancedLevel AS advancedLevel, quality AS quality, exp AS exp,cardRefId AS
+		cardRefId,costMoney AS costMoney, costFostBolus AS costFostBolus, costAdvancedBolus AS costAdvancedBolus, costAdvanceCards AS costAdvanceCards, costDestinyStone AS costDestinyStone,
+		 costWakeUpBolus AS costWakeUpBolus, costWakeUpCards AS costWakeUpCards, costWakeUpMoney AS costWakeUpMoney
+		FROM t_game_role_card 
+		WHERE roleId=#value# 
+	</select>
+
+	<select id="getCardBean" parameterClass="long" resultClass="cardBean">
+		SELECT 
+		PKId AS PKId, gameAreaId AS gameAreaId, roleId AS roleId, positionId AS positionId, rangedId AS rangedId, level AS level, advancedLevel AS advancedLevel, quality AS quality, exp AS exp,cardRefId AS cardRefId, costMoney AS costMoney,
+		 costFostBolus AS costFostBolus, costAdvancedBolus AS costAdvancedBolus, costAdvanceCards AS costAdvanceCards, costDestinyStone AS costDestinyStone,
+		  costWakeUpBolus AS costWakeUpBolus, costWakeUpCards AS costWakeUpCards, costWakeUpMoney AS costWakeUpMoney
+		FROM t_game_role_card
+		WHERE
+		PKId=#value#
+	</select>
+
+	<delete id="deleteCardBean" parameterClass="cardBean">
+	    DELETE FROM
+		t_game_role_card WHERE PKId=#PKId#
+	</delete>
+
+	<update id="updateCardBean" parameterClass="cardBean">
+	    UPDATE
+		t_game_role_card 
+		SET level = #level#, advancedLevel = #advancedLevel#, quality = #quality#, exp = #exp#, costMoney = #costMoney#,
+		 costFostBolus = #costFostBolus#, costAdvancedBolus = #costAdvancedBolus#, costAdvanceCards = #costAdvanceCards#,
+		 cardRefId = #cardRefId#, costDestinyStone = #costDestinyStone#,positionId = #positionId#,rangedId = #rangedId#,
+		  costWakeUpBolus = #costWakeUpBolus#, costWakeUpCards = #costWakeUpCards#, costWakeUpMoney = #costWakeUpMoney#
+		WHERE 
+		PKId=#PKId#
+	</update>
+
+	<update id="setCardBeanPosition" parameterClass="cardBean">
+	    UPDATE
+		t_game_role_card
+		SET positionId = #positionId#,rangedId = #rangedId#
+		WHERE
+		PKId=#PKId#
+	</update>
+
+</sqlMap>

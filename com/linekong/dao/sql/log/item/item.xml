@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ItemBean">
+
+    <typeAlias alias="itemBean" type="com.linekong.dao.sql.log.item.ItemBean"/>
+
+    <insert id="addItemBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_item(userId, roleId, roleLevel, logDateTime, itemId, itemRefId, changeNum, oldNum, curNum, itemType, playType, intParam1, strParam1, intParam2, strParam2, intParam3)values
+        ]]>
+        <iterate conjunction=",">
+            <![CDATA[
+        (#[].userId#, #[].roleId#, #[].roleLevel#, #[].logDateTime#, #[].itemId#, #[].itemRefId#, #[].changeNum#, #[].oldNum#, #[].curNum#, #[].itemType#, #[].playType#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].intParam3#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getItemBean" parameterClass="long" resultClass="itemBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, logDateTime AS logDateTime, itemId AS itemId, itemRefId AS itemRefId, changeNum AS changeNum, oldNum AS oldNum, curNum AS curNum, itemType AS itemType, playType AS playType, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_item
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getItemBeanList" parameterClass="java.util.Map" resultClass="itemBean" remapResults="true">
+        SELECT id AS id, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, logDateTime AS logDateTime, itemId AS itemId, itemRefId AS itemRefId, changeNum AS changeNum, oldNum AS oldNum, curNum AS curNum, itemType AS itemType, playType AS playType, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM
+        t_log_item
+        WHERE
+        <![CDATA[ roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time#]]>
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="item_id">
+                <![CDATA[ itemRefId = #item_id#]]>
+            </isGreaterThan>
+        </dynamic>
+
+        <dynamic prepend="AND">
+            <isEqual compareValue="1" property="op_type">
+                <![CDATA[  changeNum > 0 ]]>
+            </isEqual>
+        </dynamic>
+
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="1" property="op_type">
+            <![CDATA[  changeNum < 0 ]]>
+            </isGreaterThan>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+</sqlMap>

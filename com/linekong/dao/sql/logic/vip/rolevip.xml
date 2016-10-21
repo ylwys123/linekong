@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleVipBean">
+	<typeAlias alias="roleVipBean" type="com.linekong.dao.sql.logic.vip.RoleVipBean"/>
+
+	<insert id="addRoleVipBean" parameterClass="roleVipBean">
+		INSERT INTO t_game_role_vip
+		(roleId,vipLevel,lastVipLevel,createTime,deadline,lastUpdateTime,money,rewardTime,lastRewerdVipLevel) 
+		VALUES
+		(#roleId#,#vipLevel#,#lastVipLevel#,#createTime#,#deadline#,#lastUpdateTime#,#money#,#rewardTime#,#lastRewerdVipLevel#)
+	</insert>
+	
+	<update id="updateRoleVipBean" parameterClass="roleVipBean">
+		UPDATE t_game_role_vip 
+		SET vipLevel = #vipLevel#,lastVipLevel = #lastVipLevel#,createTime = #createTime#,alreadyList = #alreadyList#,deadline = #deadline#,lastUpdateTime = #lastUpdateTime#,money = #money#,rewardTime = #rewardTime#,
+		lastRewerdVipLevel= #lastRewerdVipLevel#
+		WHERE roleId = #roleId#
+	</update>
+	
+	<select id="getRoleVipBean" parameterClass="long" resultClass="roleVipBean">
+		SELECT 
+		roleId AS roleId, vipLevel AS vipLevel, lastVipLevel AS lastVipLevel, createTime AS createTime, deadline AS deadline, lastUpdateTime AS lastUpdateTime, money AS money
+		,rewardTime AS rewardTime,lastRewerdVipLevel AS lastRewerdVipLevel
+		FROM  t_game_role_vip 
+		WHERE roleId=#value# 
+	</select>
+</sqlMap>

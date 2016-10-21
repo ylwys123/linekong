@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GlobalTimerBean">
+
+	<typeAlias alias="globalTimerBean" type="com.linekong.dao.sql.logic.globaltimer.GlobalTimerBean"/>
+
+	<insert id="addGlobalTimerBean" parameterClass="globalTimerBean">
+		INSERT INTO t_game_global_timer(
+			globalTimerType, updateTime, timer
+		)VALUES(
+			#globalTimerType#, #updateTime#, #timer#
+		)
+	</insert>
+
+	<select id="getGlobalTimerBeanList" resultClass="globalTimerBean">
+		SELECT
+			id AS id,globalTimerType AS globalTimerType,updateTime AS updateTime,timer AS timer
+		FROM t_game_global_timer
+	</select>
+
+	<update id="updateGlobalTimerBean" parameterClass="globalTimerBean">
+		UPDATE t_game_global_timer
+		SET globalTimerType = #globalTimerType#, updateTime = #updateTime# , timer= #timer#
+		WHERE id = #id#
+	</update>
+		
+	<delete id="deleteGlobalTimerBean" parameterClass="globalTimerBean">
+	    DELETE FROM
+		t_game_global_timer WHERE id=#id#
+	</delete>
+</sqlMap>

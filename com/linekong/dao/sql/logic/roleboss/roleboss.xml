@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleBossBean">
+
+	<typeAlias alias="roleBossBean" type="com.linekong.dao.sql.logic.roleboss.RoleBossBean"/>
+
+	<insert id="addRoleBossBean" parameterClass="roleBossBean">
+		INSERT INTO t_game_role_boss(
+			roleId, attackChoose, maxDamage, longHun, lastResetTime
+		)VALUES(
+			#roleId#, #attackChoose#, #maxDamage#, #longHun#, #lastResetTime#
+		)
+	</insert>
+
+	<select id="getRoleBossBean" resultClass="roleBossBean" parameterClass="long">
+		SELECT
+			roleId AS roleId,attackChoose AS attackChoose,maxDamage AS maxDamage,longHun AS longHun,lastResetTime AS lastResetTime
+		FROM t_game_role_boss 
+		WHERE roleId = #roleId#
+	</select>
+
+	<update id="updateRoleBossBean" parameterClass="roleBossBean">
+		UPDATE t_game_role_boss
+		SET
+			attackChoose = #attackChoose#,maxDamage = #maxDamage#,longHun = #longHun#,lastResetTime = #lastResetTime#
+		WHERE roleId = #roleId#
+	</update>
+
+    <select id="getMaxDamageBossDescList" parameterClass="java.util.Map" resultClass="roleBossBean">
+    	<![CDATA[
+		SELECT
+			roleId AS roleId,attackChoose AS attackChoose,maxDamage AS maxDamage,longHun AS longHun,lastResetTime AS lastResetTime
+		FROM t_game_role_boss
+		WHERE attackChoose = #school# AND maxDamage > 0 ORDER BY maxDamage DESC LIMIT #limit#
+		]]>
+	</select>
+	
+    <select id="getMaxLongHunBossDescList" parameterClass="java.util.Map" resultClass="roleBossBean">
+    	<![CDATA[
+		SELECT
+			roleId AS roleId,attackChoose AS attackChoose,maxDamage AS maxDamage,longHun AS longHun,lastResetTime = #lastResetTime#
+		FROM t_game_role_boss
+		WHERE attackChoose = #school# AND longHun > 0 ORDER BY longHun DESC LIMIT #limit#
+		]]>
+	</select>
+</sqlMap>

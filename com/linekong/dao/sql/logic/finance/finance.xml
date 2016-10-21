@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="financeBean">
+	
+	<typeAlias alias="financeBean" type="com.linekong.dao.sql.logic.finance.FinanceBean"/>
+	
+	<select id="getFinanceBean" parameterClass="java.util.HashMap"  resultClass="financeBean">
+		SELECT roleId, type, financeValue
+		FROM t_game_role_finance  
+		WHERE roleId = #roleId# AND type = #type#
+		
+	</select>
+	
+	<select id="getFinanceBeanList" parameterClass="long"  resultClass="financeBean">
+		SELECT roleId, type, financeValue
+		FROM t_game_role_finance  WHERE roleId = #roleId#
+	</select>
+		
+	<insert id="addFinanceBean" parameterClass="financeBean"> 
+		INSERT INTO t_game_role_finance(roleId, type,financeValue)
+		VALUES(#roleId#, #type#, #financeValue#)
+	</insert>
+	
+	<update id="updateFinanceBean" parameterClass="financeBean"> 
+		UPDATE t_game_role_finance 
+		SET financeValue = #financeValue#
+		WHERE roleId = #roleId# AND type=#type# 
+	</update>
+
+</sqlMap>

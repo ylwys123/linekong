@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TGameGlobalDataBean">
+
+    <typeAlias alias="tGameGlobalDataBean" type="com.linekong.dao.sql.logic.tgameglobaldata.TGameGlobalDataBean" />
+
+    <insert id="addTGameGlobalDataBean" parameterClass="tGameGlobalDataBean">
+        INSERT INTO
+        t_game_global_data
+        (dataType, updateTime, data)
+        VALUES
+        (#dataType#, #updateTime#, #data#)
+    </insert>
+
+    <update id="updateTGameGlobalDataBean" parameterClass="tGameGlobalDataBean">
+        UPDATE
+        t_game_global_data
+        SET dataType = #dataType#, updateTime = #updateTime#, data = #data#
+        WHERE
+        dataType = #dataType#
+    </update>
+
+    <delete id="deleteTGameGlobalDataBean" parameterClass="tGameGlobalDataBean">
+        DELETE FROM
+        t_game_global_data WHERE dataType = #dataType#
+    </delete>
+    <select id="getTGameGlobalDataBean" parameterClass="int" resultClass="tGameGlobalDataBean">
+        <![CDATA[
+        SELECT dataType AS dataType, updateTime AS updateTime, data AS data
+        FROM  
+        t_game_global_data
+        WHERE
+        dataType=#dataType#
+        ]]>
+    </select>
+
+</sqlMap>

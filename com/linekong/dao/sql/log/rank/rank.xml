@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RankBean">
+
+    <typeAlias alias="rankBean" type="com.linekong.dao.sql.log.rank.RankBean" />
+
+    <insert id="addRankBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_rank(rankType, roleId, afterRankValue, logDateTime, beforeRankValue)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].rankType#, #[].roleId#, #[].afterRankValue#, #[].logDateTime#, #[].beforeRankValue#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getRankBean" parameterClass="long" resultClass="rankBean">
+        <![CDATA[
+        SELECT rankType AS rankType, roleId AS roleId, afterRankValue AS afterRankValue, logDateTime AS logDateTime, beforeRankValue AS beforeRankValue
+        FROM  
+        t_log_rank
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+</sqlMap>

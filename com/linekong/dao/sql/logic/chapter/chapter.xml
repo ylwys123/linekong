@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ChapterBean">
+
+	<typeAlias alias="chapterBean" type="com.linekong.dao.sql.logic.chapter.ChapterBean" />
+
+	<insert id="addChapterBean" parameterClass="chapterBean"> 
+	    INSERT INTO 
+		t_game_role_chapter 
+		(roleId,chapterId,challengeTimes,startLevel,isReward,isFirstReward,resetTimes)
+		VALUES 
+		(#roleId#,#chapterId#,#challengeTimes#,#startLevel#,#isReward#,#isFirstReward#,#resetTimes#)
+	</insert>
+	
+	<select id="getChapterBeanList" parameterClass="long" resultClass="chapterBean">
+		SELECT 
+		roleId AS roleId, chapterId AS chapterId, challengeTimes AS challengeTimes, startLevel AS startLevel, isReward AS isReward, isFirstReward AS isFirstReward, resetTimes AS resetTimes
+		FROM t_game_role_chapter 
+		WHERE roleId=#value# 
+	</select>
+	
+	<update id="updateChapterBean" parameterClass="chapterBean"> 
+	    UPDATE
+		t_game_role_chapter 
+		SET challengeTimes = #challengeTimes#, startLevel = #startLevel#, isReward = #isReward#, isFirstReward = #isFirstReward#, resetTimes = #resetTimes#
+		WHERE 
+		roleId=#roleId# AND chapterId=#chapterId#
+	</update>
+		
+</sqlMap>

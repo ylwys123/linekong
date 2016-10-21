@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CardLevelupBean">
+
+    <typeAlias alias="cardLevelupBean" type="com.linekong.dao.sql.log.cardlevelup.CardLevelupBean" />
+
+    <insert id="addCardLevelupBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_card_levelup(userId, roleId, roleLevel, logDateTime, addExp, curExp, beforeLevel, afterLevel, costMoney, beforeFightNum, afterFightNum, cardRefId, cardId, intParam1, strParam1, intParam2, strParam2, intParam3)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].roleLevel#, #[].logDateTime#, #[].addExp#, #[].curExp#, #[].beforeLevel#, #[].afterLevel#, #[].costMoney#, #[].beforeFightNum#, #[].afterFightNum#, #[].cardRefId#, #[].cardId#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].intParam3#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getCardLevelupBean" parameterClass="long" resultClass="cardLevelupBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, logDateTime AS logDateTime, addExp AS addExp, curExp AS curExp, beforeLevel AS beforeLevel, afterLevel AS afterLevel, costMoney AS costMoney, beforeFightNum AS beforeFightNum, afterFightNum AS afterFightNum, cardRefId AS cardRefId, cardId AS cardId, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_card_levelup
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getCardLevelupBeanList" parameterClass="java.util.Map" resultClass="cardLevelupBean" remapResults="true">
+        SELECT id AS id, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, logDateTime AS logDateTime, addExp AS addExp, curExp AS curExp, beforeLevel AS beforeLevel, afterLevel AS afterLevel, costMoney AS costMoney, beforeFightNum AS beforeFightNum, afterFightNum AS afterFightNum, cardRefId AS cardRefId, cardId AS cardId, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_card_levelup
+        WHERE
+        <![CDATA[ roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time#]]>
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="item_id">
+                <![CDATA[ cardId = #item_id#]]>
+            </isGreaterThan>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+</sqlMap>

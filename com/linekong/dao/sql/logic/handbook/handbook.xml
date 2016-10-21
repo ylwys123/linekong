@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="HandbookBean">
+
+	<typeAlias alias="handbookBean" type="com.linekong.dao.sql.logic.handbook.HandbookBean"/>
+
+	<insert id="addHandbookBean" parameterClass="handbookBean">
+		INSERT INTO t_game_role_handbook(
+			roleId, handbookData
+		)VALUES(
+			#roleId#, #handbookData#
+		)
+	</insert>
+
+	<select id="getHandbookBean" resultClass="handbookBean" parameterClass="long">
+		SELECT
+			roleId,
+			handbookData
+		FROM t_game_role_handbook 
+		WHERE roleId = #value#
+	</select>
+
+	<update id="updateHandbookBean" parameterClass="handbookBean">
+		UPDATE t_game_role_handbook
+		SET
+			handbookData = #handbookData#
+		WHERE roleId = #roleId#
+	</update>
+</sqlMap>

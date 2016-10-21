@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleSettingBean">
+
+	<typeAlias alias="roleSettingBean" type="com.linekong.dao.sql.logic.rolesetting.RoleSettingBean" />
+	
+	<select id="getRoleSettingBean" parameterClass="java.util.HashMap"  resultClass="roleSettingBean">
+		SELECT roleId, type, value, value1, value2
+		FROM t_game_role_setting  
+		WHERE roleId = #roleId# AND type = #type#
+		
+	</select>
+	
+	<select id="getRoleSettingBeanList" parameterClass="long"  resultClass="roleSettingBean">
+		SELECT roleId, type, value, value1, value2
+		FROM t_game_role_setting  WHERE roleId = #roleId#
+	</select>
+		
+	<insert id="addRoleSettingBean" parameterClass="roleSettingBean"> 
+		INSERT INTO t_game_role_setting(roleId, type,value,value1,value2,dateTime)
+		VALUES(#roleId#, #type#, #value#,#value1#,#value2#,#dateTime#)
+	</insert>
+	
+	<update id="updateRoleSettingBean" parameterClass="roleSettingBean"> 
+		UPDATE t_game_role_setting 
+		SET value = #value#, value1 = #value1#, value2 = #value2#
+		WHERE roleId = #roleId# AND type=#type# 
+	</update>
+	
+</sqlMap>

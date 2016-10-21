@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="AccessoryRefineBean">
+
+    <typeAlias alias="accessoryRefineBean" type="com.linekong.dao.sql.log.accessoryrefine.AccessoryRefineBean" />
+
+    <insert id="addAccessoryRefineBean" parameterClass="accessoryRefineBean">
+        INSERT INTO
+        t_log_accessory_refine
+        (id, userId, roleId, logDateTime, roleLevel, costAccessoryIds, costAccessoryRefIds, costMoney, costAccessoryRefineStone, addExp, curExp, beforeLevel, afterLevel, beforeFightNum, afterFightNum, equipCardId, equipCardRefId, accessoryId, accessoryRefId, intParam1, strParam1, intParam2, strParam2)
+        VALUES
+        (#id#, #userId#, #roleId#, #logDateTime#, #roleLevel#, #costAccessoryIds#, #costAccessoryRefIds#, #costMoney#, #costAccessoryRefineStone#, #addExp#, #curExp#, #beforeLevel#, #afterLevel#, #beforeFightNum#, #afterFightNum#, #equipCardId#, #equipCardRefId#, #accessoryId#, #accessoryRefId#, #intParam1#, #strParam1#, #intParam2#, #strParam2#)
+        <selectKey resultClass="long" keyProperty="id">
+            SELECT @@IDENTITY AS id
+        </selectKey>
+    </insert>
+
+    <select id="getAccessoryRefineBean" parameterClass="long" resultClass="accessoryRefineBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, roleLevel AS roleLevel, costAccessoryIds AS costAccessoryIds, costAccessoryRefIds AS costAccessoryRefIds, costMoney AS costMoney, costAccessoryRefineStone AS costAccessoryRefineStone, addExp AS addExp, curExp AS curExp, beforeLevel AS beforeLevel, afterLevel AS afterLevel, beforeFightNum AS beforeFightNum, afterFightNum AS afterFightNum, equipCardId AS equipCardId, equipCardRefId AS equipCardRefId, accessoryId AS accessoryId, accessoryRefId AS accessoryRefId, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2
+        FROM  
+        t_log_accessory_refine
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+</sqlMap>

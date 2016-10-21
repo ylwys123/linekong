@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="QuestBean">
+
+	<typeAlias alias="questBean" type="com.linekong.dao.sql.logic.quest.QuestBean" />
+
+	<insert id="addQuestBean" parameterClass="questBean"> 
+	    INSERT INTO 
+		t_game_role_quest 
+		(roleId,questId,schedule,demand,state,finishTime,rewardTime) 
+		VALUES 
+		(#roleId#,#questId#,#schedule#,#demand#,#state#,#finishTime#,#rewardTime#)
+	</insert>
+	
+	<select id="getQuestBeanList" parameterClass="long" resultClass="questBean">
+		SELECT 
+		roleId AS roleId, questId AS questId, schedule AS schedule, demand AS demand, state AS state,
+		finishTime AS finishTime, rewardTime AS rewardTime
+		FROM t_game_role_quest 
+		WHERE roleId=#value# 
+	</select>
+	
+	<update id="updateQuestBean" parameterClass="questBean"> 
+	    UPDATE
+		t_game_role_quest 
+		SET schedule = #schedule#, state = #state#, finishTime = #finishTime#, rewardTime = #rewardTime#
+		WHERE 
+		roleId=#roleId# AND questId=#questId#
+	</update>
+	
+	<update id="rewardQuest" parameterClass="questBean"> 
+	    UPDATE
+		t_game_role_quest 
+		SET state = #state#, rewardTime = #rewardTime#
+		WHERE 
+		roleId=#roleId# AND questId=#questId#
+	</update>		
+</sqlMap>

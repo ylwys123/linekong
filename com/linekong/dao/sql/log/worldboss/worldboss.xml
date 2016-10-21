@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="WorldbossBean">
+
+    <typeAlias alias="worldbossBean" type="com.linekong.dao.sql.log.worldboss.WorldbossBean" />
+
+    <insert id="addWorldbossBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_worldboss(bossLevel, KillRoleId, logDateTime, bossPkId)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].bossLevel#, #[].KillRoleId#, #[].logDateTime#, #[].bossPkId#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getWorldbossBean" parameterClass="long" resultClass="worldbossBean">
+        <![CDATA[
+        SELECT id AS id, bossLevel AS bossLevel, KillRoleId AS KillRoleId, logDateTime AS logDateTime, bossPkId AS bossPkId
+        FROM  
+        t_log_worldboss
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getWorldbossBeanList" parameterClass="java.util.Map" resultClass="worldbossBean" remapResults="true">
+        SELECT id AS id, bossLevel AS bossLevel, KillRoleId AS KillRoleId, logDateTime AS logDateTime, bossPkId AS bossPkId
+        FROM
+        t_log_worldboss
+        WHERE
+        <![CDATA[ roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time#]]>
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="item_id">
+                <![CDATA[ bossPkId = #item_id#]]>
+            </isGreaterThan>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+</sqlMap>

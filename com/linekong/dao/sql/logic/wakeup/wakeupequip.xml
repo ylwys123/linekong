@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="WakeUpEquipBean">
+
+    <typeAlias alias="wakeUpEquipBean" type="com.linekong.dao.sql.logic.wakeup.WakeUpEquipBean"/>
+
+	<insert id="addWakeUpEquipBean" parameterClass="wakeUpEquipBean">
+		INSERT INTO
+		t_game_role_wake_up_equip
+		(roleId,refWakeUpEquipId,num)
+		VALUES
+		(#roleId#,#refWakeUpEquipId#,#num#)
+	</insert>
+
+	<update id="updateWakeUpEquipBean" parameterClass="wakeUpEquipBean">
+		UPDATE
+		t_game_role_wake_up_equip
+		SET roleId = #roleId#, refWakeUpEquipId = #refWakeUpEquipId#, num = #num#
+		WHERE
+		roleId=#roleId# AND refWakeUpEquipId = #refWakeUpEquipId#
+	</update>
+
+	<select id="getWakeUpEquipBeanList" parameterClass="long" resultClass="wakeUpEquipBean">
+		<![CDATA[
+		SELECT roleId AS roleId, refWakeUpEquipId AS refWakeUpEquipId, num AS num
+		FROM t_game_role_wake_up_equip WHERE roleId = #roleId#
+		]]>
+	</select>
+
+	<delete id="deleteWakeUpEquipBean" parameterClass="wakeUpEquipBean">
+		DELETE FROM
+		t_game_role_wake_up_equip WHERE roleId=#roleId# AND refWakeUpEquipId=#refWakeUpEquipId#
+	</delete>
+</sqlMap>

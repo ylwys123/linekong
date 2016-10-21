@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RewardBean">
+
+	<typeAlias alias="rewardBean" type="com.linekong.dao.sql.logic.reward.RewardBean"/>
+
+	<insert id="addRewardBean" parameterClass="rewardBean">
+		INSERT INTO t_game_role_reward(
+			roleId, rewardData, receiveData
+		)VALUES(
+			#roleId#, #rewardData#, #receiveData#
+		)
+	</insert>
+
+	<select id="getRewardBean" resultClass="rewardBean" parameterClass="long">
+		SELECT
+			roleId AS roleId, rewardData AS rewardData, receiveData AS receiveData
+		FROM t_game_role_reward 
+		WHERE roleId = #value#
+	</select>
+
+	<update id="updateRewardBean" parameterClass="rewardBean">
+		UPDATE t_game_role_reward
+		SET
+			rewardData = #rewardData# , receiveData = #receiveData#
+		WHERE roleId = #roleId#
+	</update>
+</sqlMap>

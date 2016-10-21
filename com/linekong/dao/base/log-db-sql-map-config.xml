@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+    <transactionManager type="JDBC">
+        <dataSource type="JNDI">
+            <property name="DataSource" value="/logdb"/>
+        </dataSource>
+    </transactionManager>
+
+
+
+    <sqlMap resource="com/linekong/dao/sql/log/coin/coin.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/money/money.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/bindmoney/bindmoney.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/power/power.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/energy/energy.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/arena/arena.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/exorcism/exorcism.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/rob/rob.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/cardfoster/cardfoster.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/cardwakeup/cardwakeup.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/cardlevelup/cardlevelup.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/cardadvance/cardadvance.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/carddecompose/carddecompose.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/cardreduction/cardreduction.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/cardproductcost/cardproductcost.xml"/>
+
+    <sqlMap resource="com/linekong/dao/sql/log/chapter/chapter.xml"/>
+
+    <sqlMap resource="com/linekong/dao/sql/log/outfitstrengthen/outfitstrengthen.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/outfitdecompose/outfitdecompose.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/outfitrefine/outfitrefine.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/outfitproductcost/outfitproductcost.xml"/>
+
+    <sqlMap resource="com/linekong/dao/sql/log/accessorystrengthen/accessorystrengthen.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/accessoryrefine/accessoryrefine.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/accessoryreduction/accessoryreduction.xml"/>
+
+    <sqlMap resource="com/linekong/dao/sql/log/item/item.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/rank/rank.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/online/online.xml"/>
+
+
+
+    <sqlMap resource="com/linekong/dao/sql/log/dropgroup/dropgroup.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/login/login.xml"/>
+
+    <sqlMap resource="com/linekong/dao/sql/log/grain/grain.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/team/team.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/practice/practice.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/carddestiny/carddestiny.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/activity/activity.xml"/>
+
+    <sqlMap resource="com/linekong/dao/sql/log/gang/gang.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/gangchapter/gangchapter.xml"/>
+
+    <sqlMap resource="com/linekong/dao/sql/log/worldboss/worldboss.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/worldbossbattle/worldbossbattle.xml"/>
+
+    <sqlMap resource="com/linekong/dao/sql/log/exorcismbot/exorcismbot.xml"/>
+
+    <sqlMap resource="com/linekong/dao/sql/log/superweaponreduction/superweaponreduction.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/superweaponproductcost/superweaponproductcost.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/piece/piece.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/charge/charge.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/popular/popular.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/jingyuan/jingyuan.xml"/>
+ 	<sqlMap resource="com/linekong/dao/sql/log/xiangong/xiangong.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/honor/honor.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/shenhun/shenhun.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/souljage/souljage.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/yixing/yixing.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/artifact/artifact.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/log/artifactproductcost/artifactproductcost.xml"/>    
+</sqlMapConfig>

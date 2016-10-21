@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleSurplusBean">
+	<typeAlias alias="roleSurplusbean" type="com.linekong.dao.sql.logic.surplus.RoleSurplusBean"/>
+
+	<insert id="addSurplusBean" parameterClass="roleSurplusbean">
+		INSERT INTO t_game_role_surplus(
+			roleId,type,count 
+		)VALUES(
+			#roleId#,#type#,#count#
+		)
+	</insert>
+	
+	<select id="getSurplusListByRoleId" resultClass="roleSurplusbean" parameterClass="long">
+		SELECT
+			roleId,type, count
+		FROM t_game_role_surplus
+		WHERE roleId = #value#
+	</select>
+
+	<update id="updateSurplusBean" parameterClass="roleSurplusbean">
+		UPDATE t_game_role_surplus
+		SET
+			count = #count# 
+		WHERE roleId = #roleId# and type=#type#
+	</update>
+</sqlMap>

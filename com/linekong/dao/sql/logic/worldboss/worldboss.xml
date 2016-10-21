@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="WorldBossBean">
+
+	<typeAlias alias="worldBossBean" type="com.linekong.dao.sql.logic.worldboss.WorldBossBean"/>
+
+	<insert id="addWorldBossBean" parameterClass="worldBossBean">
+		INSERT INTO t_game_world_boss(
+			bossLevel, killerId,luckerId, bossInfo, rewardHistory, lastResetTime
+		)VALUES(
+			#bossLevel#, #killerId#, #luckerId#, #bossInfo#, #rewardHistory#, #lastResetTime#
+		)
+	</insert>
+
+	<select id="getWorldBossBean" resultClass="worldBossBean">
+		SELECT
+			bossLevel AS bossLevel,killerId AS killerId,luckerId AS luckerId,bossInfo AS bossInfo,rewardHistory AS rewardHistory,lastResetTime AS lastResetTime
+		FROM t_game_world_boss
+	</select>
+
+	<update id="updateWorldBossBean" parameterClass="worldBossBean">
+		UPDATE t_game_world_boss
+		SET bossLevel = #bossLevel#,killerId = #killerId#,luckerId = #luckerId#,bossInfo = #bossInfo#,rewardHistory = #rewardHistory#,lastResetTime = #lastResetTime#
+	</update>
+</sqlMap>

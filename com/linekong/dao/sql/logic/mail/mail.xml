@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MailBean">
+
+	<typeAlias alias="mailBean" type="com.linekong.dao.sql.logic.mail.MailBean" />
+
+	<insert id="addMailBean" parameterClass="mailBean">
+	    INSERT INTO 
+		t_game_role_mail 
+		(PKId,gameAreaId,roleId,senderId,mailRefId,title,content,flag,readTime,isLock,sendTime,paramsInfo,attachInfo)
+		VALUES 
+		(#PKId#,#gameAreaId#,#roleId#,#senderId#,#mailRefId#,#title#,#content#,#flag#,#readTime#,#isLock#,#sendTime#,#paramsInfo#,#attachInfo#)
+	</insert>
+
+	<select id="getMailBeanList" parameterClass="long" resultClass="mailBean">
+		SELECT 
+		PKId AS PKId, gameAreaId AS gameAreaId, roleId AS roleId, senderId AS senderId, mailRefId AS mailRefId, title AS title, content AS content, flag AS flag, readTime AS readTime,isLock AS
+		isLock,sendTime AS sendTime,paramsInfo AS paramsInfo,attachInfo AS attachInfo
+		FROM t_game_role_mail 
+		WHERE roleId=#value#
+	</select>
+
+	<delete id="deleteMailBean" parameterClass="mailBean">
+	    DELETE FROM
+		t_game_role_mail WHERE PKId=#PKId#
+	</delete>
+
+	<update id="updateMailBean" parameterClass="mailBean">
+	    UPDATE
+		t_game_role_mail 
+		SET isLock = #isLock#, flag = #flag#, readTime = #readTime#
+		WHERE 
+		PKId=#PKId#
+	</update>
+	
+</sqlMap>

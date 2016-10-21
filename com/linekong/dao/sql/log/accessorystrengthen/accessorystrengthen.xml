@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="AccessoryStrengthenBean">
+
+    <typeAlias alias="accessoryStrengthenBean" type="com.linekong.dao.sql.log.accessorystrengthen.AccessoryStrengthenBean" />
+
+    <insert id="addAccessoryStrengthenBean" parameterClass="accessoryStrengthenBean">
+        INSERT INTO
+        t_log_accessory_strengthen
+        (id, userId, roleId, logDateTime, roleLevel, costAccessoryIds, costAccessoryRefIds, costMoney, curExp, addExp, beforeLevel, afterLevel, beforeFightNum, afterFightNum, equipCardId, equipCardRefId, accessoryId, accessoryRefId, intParam1, strParam1, intParam2, strParam2)
+        VALUES
+        (#id#, #userId#, #roleId#, #logDateTime#, #roleLevel#, #costAccessoryIds#, #costAccessoryRefIds#, #costMoney#, #curExp#, #addExp#, #beforeLevel#, #afterLevel#, #beforeFightNum#, #afterFightNum#, #equipCardId#, #equipCardRefId#, #accessoryId#, #accessoryRefId#, #intParam1#, #strParam1#, #intParam2#, #strParam2#)
+        <selectKey resultClass="long" keyProperty="id">
+            SELECT @@IDENTITY AS id
+        </selectKey>
+    </insert>
+
+    <select id="getAccessoryStrengthenBean" parameterClass="long" resultClass="accessoryStrengthenBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, roleLevel AS roleLevel, costAccessoryIds AS costAccessoryIds, costAccessoryRefIds AS costAccessoryRefIds, costMoney AS costMoney, curExp AS curExp, addExp AS addExp, beforeLevel AS beforeLevel, afterLevel AS afterLevel, beforeFightNum AS beforeFightNum, afterFightNum AS afterFightNum, equipCardId AS equipCardId, equipCardRefId AS equipCardRefId, accessoryId AS accessoryId, accessoryRefId AS accessoryRefId, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2
+        FROM  
+        t_log_accessory_strengthen
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+</sqlMap>

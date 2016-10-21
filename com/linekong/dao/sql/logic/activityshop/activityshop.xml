@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ActivityShopBean">
+
+    <typeAlias alias="activityShopBean" type="com.linekong.dao.sql.logic.activityshop.ActivityShopBean" />
+
+    <insert id="addActivityShopBean" parameterClass="activityShopBean">
+        INSERT INTO
+        t_game_role_activity_shop
+        (PKId, gameAreaId, roleId, tabId, buyCountLeft, activityType, guId, activityPkId)
+        VALUES
+        (#PKId#, #gameAreaId#, #roleId#, #tabId#, #buyCountLeft#, #activityType#, #guId#, #activityPkId#)
+    </insert>
+
+    <update id="updateActivityShopBean" parameterClass="activityShopBean">
+        UPDATE
+        t_game_role_activity_shop
+        SET roleId = #roleId#, tabId = #tabId#, buyCountLeft = #buyCountLeft#, activityType = #activityType#, guId = #guId#, activityPkId = #activityPkId#
+        WHERE
+        PKId = #PKId#
+    </update>
+
+    <delete id="deleteActivityShopBean" parameterClass="activityShopBean">
+        DELETE FROM
+        t_game_role_activity_shop WHERE PKId = #PKId#
+    </delete>
+
+    <select id="getActivityShopBeanList" parameterClass="java.util.Map" resultClass="activityShopBean">
+        <![CDATA[
+        SELECT PKId AS PKId, gameAreaId AS gameAreaId, roleId AS roleId, tabId AS tabId, buyCountLeft AS buyCountLeft, activityType AS activityType,
+        guId AS guId, activityPkId AS activityPkId
+        FROM  
+        t_game_role_activity_shop
+        WHERE
+        roleId=#roleId# AND tabId=#tabId# AND activityType=#activityType# AND activityPkId = #activityPkId#
+        ]]>
+    </select>
+
+</sqlMap>

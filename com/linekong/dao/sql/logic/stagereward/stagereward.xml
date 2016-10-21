@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StageRewardBean">
+
+	<typeAlias alias="stageRewardBean" type="com.linekong.dao.sql.logic.stagereward.StageRewardBean" />
+
+	<insert id="addStageRewardBean" parameterClass="stageRewardBean"> 
+	    INSERT INTO 
+		t_game_role_stage_reward 
+		(roleId,stageId,chest1,chest2,chest3) 
+		VALUES 
+		(#roleId#,#stageId#,#chest1#,#chest2#,#chest3#)
+	</insert>
+	
+	<select id="getStageRewardBeanList" parameterClass="long" resultClass="stageRewardBean">
+		SELECT 
+		roleId AS roleId, stageId AS stageId, chest1 AS chest1, chest2 AS chest2, chest3 AS chest3
+		FROM t_game_role_stage_reward 
+		WHERE roleId=#value# 
+	</select>
+	
+	<update id="updateStageRewardBean" parameterClass="stageRewardBean"> 
+	    UPDATE
+		t_game_role_stage_reward 
+		SET chest1 = #chest1#, chest2 = #chest2#, chest3 = #chest3#
+		WHERE 
+		roleId=#roleId# AND stageId=#stageId#
+	</update>
+		
+</sqlMap>

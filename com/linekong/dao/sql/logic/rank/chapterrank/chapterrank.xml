@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ChapterRankInfoBean">
+
+    <typeAlias alias="chapterRankInfoBean" type="com.linekong.dao.sql.logic.rank.chapterrank.ChapterRankInfoBean"/>
+
+    <insert id="addChapterRankBean" parameterClass="chapterRankInfoBean">
+		INSERT INTO
+		t_game_role_chapter_rank
+		(roleId,comparableValue,levelInfoRefId)
+		VALUES
+		(#roleId#,#comparableValue#,#levelInfoRefId#)
+	</insert>
+
+    <update id="updateChapterRankBean" parameterClass="chapterRankInfoBean">
+		UPDATE
+		t_game_role_chapter_rank
+		SET roleId = #roleId#, comparableValue = #comparableValue#, levelInfoRefId = #levelInfoRefId#
+		WHERE
+		roleId=#roleId# AND levelInfoRefId=#levelInfoRefId#
+	</update>
+
+    <select id="getChapterRankBeanDescList" resultClass="chapterRankInfoBean" parameterClass="java.util.Map">
+		<![CDATA[
+		SELECT roleId AS roleId, comparableValue AS comparableValue, levelInfoRefId AS levelInfoRefId
+		FROM t_game_role_chapter_rank
+		WHERE
+		levelInfoRefId=#levelInfoRefId#
+		ORDER BY comparableValue DESC LIMIT #limit#
+        ]]>
+	</select>
+
+	<delete id="deleteChapterRankBean" parameterClass="chapterRankInfoBean">
+		DELETE FROM
+		t_game_role_chapter_rank WHERE roleId=#roleId# AND levelInfoRefId=#levelInfoRefId#
+	</delete>
+
+</sqlMap>

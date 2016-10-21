@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ChargeBean">
+
+    <typeAlias alias="chargeBean" type="com.linekong.dao.sql.log.charge.ChargeBean" />
+
+    <insert id="addChargeBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_charge(userId, roleId, roleLevel, logDateTime, intParam1, intParam2, intParam3, strParam1, strParam2, detailId, amount, totalAmount, balance)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].roleLevel#, #[].logDateTime#, #[].intParam1#, #[].intParam2#, #[].intParam3#, #[].strParam1#, #[].strParam2#, #[].detailId#, #[].amount#, #[].totalAmount#, #[].balance#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getChargeBean" parameterClass="long" resultClass="chargeBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, logDateTime AS logDateTime, intParam1 AS intParam1, intParam2 AS intParam2, intParam3 AS intParam3, strParam1 AS strParam1, strParam2 AS strParam2, detailId AS detailId, amount AS amount, totalAmount AS totalAmount, balance AS balance
+        FROM  
+        t_log_charge
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+</sqlMap>

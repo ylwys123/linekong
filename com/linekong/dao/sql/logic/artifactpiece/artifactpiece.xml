@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CardPieceBean">
+
+	<typeAlias alias="artifactPieceBean" type="com.linekong.dao.sql.logic.artifactpiece.ArtifactPieceBean" />
+
+	<insert id="addArtifactPieceBean" parameterClass="artifactPieceBean"> 
+	    INSERT INTO 
+		t_game_role_artifact_piece 
+		(roleId,artifactRefId,num,effectTime,effectEndTime) 
+		VALUES 
+		(#roleId#,#artifactRefId#,#num#,#effectTime#,#effectEndTime#)
+	</insert>
+	
+	<select id="getArtifactPieceBeanList" parameterClass="long" resultClass="artifactPieceBean">
+		SELECT 
+		roleId AS roleId, artifactRefId AS artifactRefId, num AS num ,effectTime AS effectTime, effectEndTime AS effectEndTime
+		FROM t_game_role_artifact_piece 
+		WHERE roleId=#value# 
+	</select>
+	
+	<delete id="deleteArtifactPieceBean" parameterClass="artifactPieceBean"> 
+	    DELETE FROM
+		t_game_role_artifact_piece WHERE roleId=#roleId# AND artifactRefId=#artifactRefId#
+	</delete>
+	
+	<update id="updateArtifactPieceBean" parameterClass="artifactPieceBean"> 
+	    UPDATE
+		t_game_role_artifact_piece 
+		SET num = #num#, effectTime = #effectTime#, effectEndTime = #effectEndTime#
+		WHERE 
+		roleId=#roleId# AND artifactRefId=#artifactRefId#
+	</update>
+	
+</sqlMap>

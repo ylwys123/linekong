@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GrainBean">
+
+    <typeAlias alias="grainBean" type="com.linekong.dao.sql.log.grain.GrainBean" />
+
+    <insert id="addGrainBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_grain(userId, roleId, roleLevel, redBattleScore, blueGrainBefore, blueGrainAfter, redGrainBefore, redGrainAfter, battleScore, redId, battleId, seed, star, round, blueDamage, redDamage, blueMaxDamage, redMaxDamage, blueHPResult, redHPResult, operationRecord, logDateTime, blueCardInfo, redCardInfo, blueArtifactInfo, redArtifactInfo, intParam1, strParam1, intParam2, strParam2, clientBattleScore, intParam3)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].roleLevel#, #[].redBattleScore#, #[].blueGrainBefore#, #[].blueGrainAfter#, #[].redGrainBefore#, #[].redGrainAfter#, #[].battleScore#, #[].redId#, #[].battleId#, #[].seed#, #[].star#, #[].round#, #[].blueDamage#, #[].redDamage#, #[].blueMaxDamage#, #[].redMaxDamage#, #[].blueHPResult#, #[].redHPResult#, #[].operationRecord#, #[].logDateTime#, #[].blueCardInfo#, #[].redCardInfo#, #[].blueArtifactInfo#, #[].redArtifactInfo#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].clientBattleScore#, #[].intParam3#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getGrainBean" parameterClass="long" resultClass="grainBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, redBattleScore AS redBattleScore, blueGrainBefore AS blueGrainBefore, blueGrainAfter AS blueGrainAfter, redGrainBefore AS redGrainBefore, redGrainAfter AS redGrainAfter, battleScore AS battleScore, redId AS redId, battleId AS battleId, seed AS seed, star AS star, round AS round, blueDamage AS blueDamage, redDamage AS redDamage, blueMaxDamage AS blueMaxDamage, redMaxDamage AS redMaxDamage, blueHPResult AS blueHPResult, redHPResult AS redHPResult, operationRecord AS operationRecord, logDateTime AS logDateTime, blueCardInfo AS blueCardInfo, redCardInfo AS redCardInfo, blueArtifactInfo AS blueArtifactInfo, redArtifactInfo AS redArtifactInfo, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, clientBattleScore AS clientBattleScore, intParam3 AS intParam3
+        FROM  
+        t_log_grain
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getGrainBeanList" parameterClass="java.util.Map" resultClass="grainBean" remapResults="true">
+        SELECT id AS id, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, redBattleScore AS redBattleScore, blueGrainBefore AS blueGrainBefore, blueGrainAfter AS blueGrainAfter, redGrainBefore AS redGrainBefore, redGrainAfter AS redGrainAfter, battleScore AS battleScore, redId AS redId, battleId AS battleId, seed AS seed, star AS star, round AS round, blueDamage AS blueDamage, redDamage AS redDamage, blueMaxDamage AS blueMaxDamage, redMaxDamage AS redMaxDamage, blueHPResult AS blueHPResult, redHPResult AS redHPResult, operationRecord AS operationRecord, logDateTime AS logDateTime, blueCardInfo AS blueCardInfo, redCardInfo AS redCardInfo, blueArtifactInfo AS blueArtifactInfo, redArtifactInfo AS redArtifactInfo, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, clientBattleScore AS clientBattleScore, intParam3 AS intParam3
+        FROM
+        t_log_grain
+        WHERE
+        <![CDATA[ roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time#]]>
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="item_id">
+                <![CDATA[ blueGrainBefore = #item_id#]]>
+            </isGreaterThan>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+</sqlMap>

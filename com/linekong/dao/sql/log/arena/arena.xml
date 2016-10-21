@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ArenaBean">
+
+    <typeAlias alias="arenaBean" type="com.linekong.dao.sql.log.arena.ArenaBean" />
+
+    <insert id="addArenaBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_arena(userId, roleId, roleLevel, playType, redBattleScore, blueBefore, blueAfter, redBefore, redAfter, battleScore, redId, battleId, seed, star, round, blueDamage, redDamage, blueMaxDamage, redMaxDamage, blueHPResult, redHPResult, operationRecord, logDateTime, blueCardInfo, redCardInfo, blueArtifactInfo, redArtifactInfo, intParam1, strParam1, intParam2, strParam2, intParam3, clientBattleScore)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].roleLevel#, #[].playType#, #[].redBattleScore#, #[].blueBefore#, #[].blueAfter#, #[].redBefore#, #[].redAfter#, #[].battleScore#, #[].redId#, #[].battleId#, #[].seed#, #[].star#, #[].round#, #[].blueDamage#, #[].redDamage#, #[].blueMaxDamage#, #[].redMaxDamage#, #[].blueHPResult#, #[].redHPResult#, #[].operationRecord#, #[].logDateTime#, #[].blueCardInfo#, #[].redCardInfo#, #[].blueArtifactInfo#, #[].redArtifactInfo#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].intParam3#, #[].clientBattleScore#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getArenaBean" parameterClass="long" resultClass="arenaBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, playType AS playType, redBattleScore AS redBattleScore, blueBefore AS blueBefore, blueAfter AS blueAfter, redBefore AS redBefore, redAfter AS redAfter, battleScore AS battleScore, redId AS redId, battleId AS battleId, seed AS seed, star AS star, round AS round, blueDamage AS blueDamage, redDamage AS redDamage, blueMaxDamage AS blueMaxDamage, redMaxDamage AS redMaxDamage, blueHPResult AS blueHPResult, redHPResult AS redHPResult, operationRecord AS operationRecord, logDateTime AS logDateTime, blueCardInfo AS blueCardInfo, redCardInfo AS redCardInfo, blueArtifactInfo AS blueArtifactInfo, redArtifactInfo AS redArtifactInfo, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3, clientBattleScore AS clientBattleScore
+        FROM  
+        t_log_arena
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getArenaBeanList" parameterClass="java.util.Map" resultClass="arenaBean" remapResults="true">
+        SELECT id AS id, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, playType AS playType, redBattleScore AS redBattleScore, blueBefore AS blueBefore, blueAfter AS blueAfter, redBefore AS redBefore, redAfter AS redAfter, battleScore AS battleScore, redId AS redId, battleId AS battleId, seed AS seed, star AS star, round AS round, blueDamage AS blueDamage, redDamage AS redDamage, blueMaxDamage AS blueMaxDamage, redMaxDamage AS redMaxDamage, blueHPResult AS blueHPResult, redHPResult AS redHPResult, operationRecord AS operationRecord, logDateTime AS logDateTime, blueCardInfo AS blueCardInfo, redCardInfo AS redCardInfo, blueArtifactInfo AS blueArtifactInfo, redArtifactInfo AS redArtifactInfo, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3, clientBattleScore AS clientBattleScore
+        FROM
+        t_log_arena
+        WHERE
+        <![CDATA[ roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time#]]>
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="item_id">
+                <![CDATA[ blueAfter = #item_id#]]>
+            </isGreaterThan>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+</sqlMap>

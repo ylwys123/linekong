@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PieceBean">
+
+    <typeAlias alias="pieceBean" type="com.linekong.dao.sql.log.piece.PieceBean" />
+
+    <insert id="addPieceBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_piece(objectId, userId, roleId, roleLevel, logDateTime, playType, dropType, oldNum, newNum, changeNum, intParam1, strParam1, intParam2, strParam2, intParam3)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].objectId#, #[].userId#, #[].roleId#, #[].roleLevel#, #[].logDateTime#, #[].playType#, #[].dropType#, #[].oldNum#, #[].newNum#, #[].changeNum#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].intParam3#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getPieceBean" parameterClass="long" resultClass="pieceBean">
+        <![CDATA[
+        SELECT id AS id, objectId AS objectId, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, logDateTime AS logDateTime, playType AS playType, dropType AS dropType, oldNum AS oldNum, newNum AS newNum, changeNum AS changeNum, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_piece
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getPieceBeanList" parameterClass="java.util.Map" resultClass="pieceBean" remapResults="true">
+        SELECT id AS id, objectId AS objectId, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, logDateTime AS logDateTime, playType AS playType, dropType AS dropType, oldNum AS oldNum, newNum AS newNum, changeNum AS changeNum, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM
+        t_log_piece
+        WHERE
+        <![CDATA[ roleId = #roleId# AND logDateTime >= #start_time# AND logDateTime <= #end_time#]]>
+                
+        <dynamic prepend="AND">
+            <isNotEqual compareValue="-1" property="playType">
+                <![CDATA[  playType = #playType# ]]>
+            </isNotEqual>
+        </dynamic>
+        
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="pieceType">
+                <![CDATA[ dropType = #pieceType# ]]>
+            </isGreaterThan>
+        </dynamic>
+        
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="item_id">
+                <![CDATA[ objectId = #item_id#]]>
+            </isGreaterThan>
+        </dynamic>
+
+        <dynamic prepend="AND">
+            <isEqual compareValue="1" property="op_type">
+                <![CDATA[  changeNum > 0 ]]>
+            </isEqual>
+        </dynamic>
+
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="1" property="op_type">
+            <![CDATA[  changeNum < 0 ]]>
+            </isGreaterThan>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+</sqlMap>

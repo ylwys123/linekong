@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ItemBean">
+
+	<typeAlias alias="itemBean" type="com.linekong.dao.sql.logic.item.ItemBean" />
+
+	<insert id="addItemBean" parameterClass="itemBean"> 
+	    INSERT INTO 
+		t_game_role_item 
+		(PKId,gameAreaId,roleId,itemRefId,num) 
+		VALUES 
+		(#PKId#,#gameAreaId#,#roleId#,#itemRefId#,#num#)
+	</insert>
+	
+	<select id="getItemBeanList" parameterClass="long" resultClass="itemBean">
+		SELECT 
+		PKId AS PKId, gameAreaId AS gameAreaId, roleId AS roleId, itemRefId AS itemRefId, num AS num
+		FROM t_game_role_item 
+		WHERE roleId=#value# 
+	</select>
+
+	<delete id="deleteItemBean" parameterClass="itemBean"> 
+	    DELETE FROM
+		t_game_role_item WHERE PKId=#PKId#
+	</delete>
+	
+	<update id="updateItemBean" parameterClass="itemBean"> 
+	    UPDATE
+		t_game_role_item 
+		SET num = #num#
+		WHERE 
+		PKId=#PKId#
+	</update>
+		
+</sqlMap>

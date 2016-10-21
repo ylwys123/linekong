@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="OutfitPieceBean">
+
+	<typeAlias alias="outfitPieceBean" type="com.linekong.dao.sql.logic.outfitpiece.OutfitPieceBean" />
+
+	<insert id="addOutfitPieceBean" parameterClass="outfitPieceBean"> 
+	    INSERT INTO 
+		t_game_role_outfit_piece 
+		(roleId,outfitRefId,num,effectTime,effectEndTime) 
+		VALUES 
+		(#roleId#,#id#,#num#,#effectTime#,#effectEndTime#)
+	</insert>
+	
+	<select id="getOutfitPieceBeanList" parameterClass="long" resultClass="outfitPieceBean">
+		SELECT 
+		roleId AS roleId, outfitRefId AS id, num AS num ,effectTime AS effectTime, effectEndTime AS effectEndTime
+		FROM t_game_role_outfit_piece 
+		WHERE roleId=#value# 
+	</select>
+	
+	<delete id="deleteOutfitPieceBean" parameterClass="outfitPieceBean"> 
+	    DELETE FROM
+		t_game_role_outfit_piece WHERE roleId=#roleId# AND outfitRefId=#id#
+	</delete>
+	
+	<update id="updateOutfitPieceBean" parameterClass="outfitPieceBean"> 
+	    UPDATE
+		t_game_role_outfit_piece 
+		SET num = #num#, effectTime = #effectTime#, effectEndTime = #effectEndTime#
+		WHERE 
+		roleId=#roleId# AND outfitRefId=#id#
+	</update>
+	
+</sqlMap>

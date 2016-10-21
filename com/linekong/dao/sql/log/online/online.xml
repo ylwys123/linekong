@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="OnlineBean">
+
+    <typeAlias alias="onlineBean" type="com.linekong.dao.sql.log.online.OnlineBean" />
+
+    <insert id="addOnlineBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_online(onlineNum, logDateTime)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].onlineNum#, #[].logDateTime#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getOnlineBean" parameterClass="long" resultClass="onlineBean">
+        <![CDATA[
+        SELECT onlineNum AS onlineNum, logDateTime AS logDateTime
+        FROM  
+        t_log_online
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+</sqlMap>

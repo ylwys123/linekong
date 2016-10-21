@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ChatCacheBean">
+
+    <typeAlias alias="chatCacheBean" type="com.linekong.dao.sql.logic.chatcache.ChatCacheBean" />
+
+    <insert id="addChatCacheBean" parameterClass="chatCacheBean">
+        INSERT INTO
+        t_game_role_chat_cache
+        (id, chatType, receiverId, senderId, chatTime, content)
+        VALUES
+        (#id#, #chatType#, #receiverId#, #senderId#, #chatTime#, #content#)
+    </insert>
+
+    <update id="updateChatCacheBean" parameterClass="chatCacheBean">
+        UPDATE
+        t_game_role_chat_cache
+        SET id = #id#, chatType = #chatType#, receiverId = #receiverId#, senderId = #senderId#, chatTime = #chatTime#, content = #content#
+        WHERE
+        id = #id#
+    </update>
+
+    <delete id="deleteChatCacheBean" parameterClass="chatCacheBean">
+        DELETE FROM
+        t_game_role_chat_cache WHERE receiverId = #receiverId# and senderId = #senderId#
+    </delete>
+
+    <select id="getChatCacheBeanList" parameterClass="long" resultClass="chatCacheBean">
+        <![CDATA[
+        SELECT id AS id, chatType AS chatType, receiverId AS receiverId, senderId AS senderId, chatTime AS chatTime, content AS content
+        FROM  
+        t_game_role_chat_cache
+        WHERE
+        receiverId=#roleId#
+        ]]>
+    </select>
+    
+</sqlMap>

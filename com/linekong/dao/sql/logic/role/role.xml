@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleBean">
+
+	<typeAlias alias="roleBean" type="com.linekong.dao.sql.logic.role.RoleBean" />
+
+	<typeAlias alias="fightNumRankBean" type="com.linekong.dao.sql.logic.role.FightNumRankBean" />
+
+	<insert id="addRoleBean" parameterClass="roleBean">
+		INSERT INTO
+		t_game_role
+		(roleId,userId,gameAreaId,level,mainCardId,roleName,occupation,createTime,state,deleteTime,isOnline,sceneId,roleX, roleZ,roleR,lastLoginTime,lastLogoutTime,fightNum,topPvpRank,totalOnline,totalRmb)
+		VALUES
+		(#roleId#,#userId#,#gameAreaId#,#level#,#mainCardId#,#roleName#,#occupation#,#createTime#,#state#,#deleteTime#,#isOnline#,#sceneId#,#roleX#,#roleZ#,#roleR#,#lastLoginTime#,#lastLogoutTime#,#fightNum#,#topPvpRank#,#totalOnline#,#totalRmb#)
+	</insert>
+
+	<update id="deleteRoleBeanByRoleId" parameterClass="long">
+		UPDATE t_game_role
+		SET state = 0,deleteTime=now()
+		WHERE roleId = #value#
+	</update>
+
+	<update id="recoverRoleBeanByRoleId" parameterClass="long">
+		UPDATE t_game_role
+		SET state = 1,deleteTime=NULL
+		WHERE roleId = #value#
+	</update>
+
+	<update id="updateRoleBean" parameterClass="roleBean">
+		UPDATE t_game_role
+		SET level = #level#, roleName = #roleName#,isOnline = #isOnline#,sceneId = #sceneId#,roleX = #roleX#,roleZ = #roleZ#,roleR = #roleR#,lastLoginTime = #lastLoginTime#,
+		lastLogoutTime = #lastLogoutTime#,fightNum = #fightNum#, topPvpRank = #topPvpRank#, totalOnline = #totalOnline#, totalRmb = #totalRmb#
+		WHERE roleId = #roleId#
+	</update>
+
+	<select id="getRoleBeanByRoleId" parameterClass="long" resultClass="roleBean">
+		<![CDATA[
+		SELECT roleId AS roleId, userId AS userId, gameAreaId AS gameAreaId, level AS level, mainCardId AS mainCardId, roleName AS roleName, occupation AS occupation,
+		    createTime AS createTime, state AS state, deleteTime AS deleteTime, isOnline AS isOnline, sceneId AS sceneId, roleX AS roleX, roleZ AS roleZ, roleR AS roleR,
+		    lastLoginTime AS lastLoginTime,lastLogoutTime AS lastLogoutTime, fightNum AS fightNum, topPvpRank AS topPvpRank, totalOnline AS totalOnline, totalRmb AS totalRmb
+		FROM t_game_role WHERE roleId = #value#
+		]]>
+	</select>
+
+	<select id="getRoleBeanByUserId" parameterClass="java.util.Map" resultClass="roleBean">
+		<![CDATA[
+		SELECT roleId AS roleId, userId AS userId, gameAreaId AS gameAreaId, level AS level, mainCardId AS mainCardId, roleName AS roleName, occupation AS occupation,
+		    createTime AS createTime, state AS state, deleteTime AS deleteTime, isOnline AS isOnline, sceneId AS sceneId, roleX AS roleX, roleZ AS roleZ, roleR AS roleR,
+		    lastLoginTime AS lastLoginTime,lastLogoutTime AS lastLogoutTime, fightNum AS fightNum, topPvpRank AS topPvpRank, totalOnline AS totalOnline, totalRmb AS totalRmb
+		FROM t_game_role WHERE userId = #userId# AND state = #state#
+		]]>
+	</select>
+
+	<select id="getRoleBeanByNameWhenRegist" parameterClass="java.lang.String" resultClass="roleBean">
+		<![CDATA[
+		SELECT roleId AS roleId, userId AS userId, gameAreaId AS gameAreaId, level AS level, mainCardId AS mainCardId, roleName AS roleName, occupation AS occupation,
+		    createTime AS createTime, state AS state, deleteTime AS deleteTime, isOnline AS isOnline, sceneId AS sceneId, roleX AS roleX, roleZ AS roleZ, roleR AS roleR,
+		    lastLoginTime AS lastLoginTime,lastLogoutTime AS lastLogoutTime, fightNum AS fightNum, topPvpRank AS topPvpRank, totalOnline AS totalOnline, totalRmb AS totalRmb
+		FROM t_game_role WHERE roleName = #value# LIMIT 1
+		]]>
+	</select>
+
+	<update id="updateRoleBeanLoginState" parameterClass="roleBean">
+		UPDATE t_game_role set isOnline = #isOnline#,lastLoginTime = #lastLoginTime#,lastLogoutTime =#lastLogoutTime#,sceneId = #sceneId#,roleX = #roleX#,roleZ = #roleZ#,roleR = #roleR#, totalOnline = #totalOnline#
+		WHERE roleId= #roleId#
+	</update>
+
+	<update id="clearAllRoleBeanIsOnline">
+		UPDATE t_game_role set isOnline = 0
+	</update>
+
+	<select id="getRecommendRoleIdList" parameterClass="int" resultClass="long">
+		<![CDATA[
+		SELECT roleId AS roleId
+		FROM t_game_role WHERE state = 1 ORDER BY lastLogoutTime DESC LIMIT #limit#
+		]]>
+	</select>
+	
+	<select id="getSceneRoleIdList" parameterClass="java.util.Map" resultClass="long">
+		<![CDATA[
+		SELECT roleId AS roleId
+		FROM t_game_role WHERE state = 1 AND sceneId = #sceneId# ORDER BY lastLogoutTime DESC LIMIT #limit#
+		]]>
+	</select>
+
+	<select id="getFightNumDescList" parameterClass="int" resultClass="fightNumRankBean">
+	<![CDATA[
+		SELECT roleId AS roleId, fightNum AS fightNum
+		FROM t_game_role WHERE state = 1 ORDER BY fightNum DESC LIMIT #limit#
+
+        ]]>
+	</select>
+
+	<select id="getLevelDescList" parameterClass="int" resultClass="roleBean">
+		<![CDATA[
+		SELECT roleId AS roleId, level AS level
+		FROM t_game_role WHERE state = 1 ORDER BY level DESC LIMIT #limit#
+		]]>
+	</select>
+	
+	<select id="getAllRoleBeanList" parameterClass="byte" resultClass="roleBean">
+		<![CDATA[
+		SELECT roleId AS roleId, level AS level
+		FROM t_game_role WHERE state = #value#
+		]]>
+	</select>
+</sqlMap>

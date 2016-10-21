@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SuperWeaponBean">
+
+    <typeAlias alias="superWeaponBean" type="com.linekong.dao.sql.logic.superweapon.SuperWeaponBean" />
+
+    <insert id="addSuperWeaponBean" parameterClass="superWeaponBean">
+        INSERT INTO
+        t_game_role_super_weapon
+        (PKId, gameAreaId, roleId, refId, strengthenLevel, equipCardId, costCoin, costElite)
+        VALUES
+        (#PKId#, #gameAreaId#, #roleId#, #refId#, #strengthenLevel#, #equipCardId#, #costCoin#, #costElite#)
+    </insert>
+
+    <update id="updateSuperWeaponBean" parameterClass="superWeaponBean">
+        UPDATE
+        t_game_role_super_weapon
+        SET PKId = #PKId#, gameAreaId = #gameAreaId#, roleId = #roleId#, refId = #refId#, strengthenLevel = #strengthenLevel#, equipCardId = #equipCardId#, costCoin = #costCoin#, costElite = #costElite#
+        WHERE
+        PKId = #PKId# AND gameAreaId = #gameAreaId#
+    </update>
+
+    <delete id="deleteSuperWeaponBean" parameterClass="superWeaponBean">
+        DELETE FROM
+        t_game_role_super_weapon WHERE PKId = #PKId# AND gameAreaId = #gameAreaId#
+    </delete>
+
+    <select id="getSuperWeaponBeanList" parameterClass="long" resultClass="superWeaponBean">
+        <![CDATA[
+        SELECT PKId AS PKId, gameAreaId AS gameAreaId, roleId AS roleId, refId AS refId, strengthenLevel AS strengthenLevel, equipCardId AS equipCardId, costCoin AS costCoin, costElite AS costElite
+        FROM  
+        t_game_role_super_weapon
+        WHERE
+        roleId=#roleId#
+        ]]>
+    </select>
+
+</sqlMap>

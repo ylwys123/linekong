@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ArtifactBean">
+
+    <typeAlias alias="artifactBean" type="com.linekong.dao.sql.log.artifact.ArtifactBean" />
+
+    <insert id="addArtifactBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_artifact(playType, userId, roleId, roleLevel, logDateTime, PKId, artifactRefId, positionId, oldStrenthenLevel, curStrenthenLevel, oldRefineLevel, curRefineLevel)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].playType#, #[].userId#, #[].roleId#, #[].roleLevel#, #[].logDateTime#, #[].PKId#, #[].artifactRefId#, #[].positionId#, #[].oldStrenthenLevel#, #[].curStrenthenLevel#, #[].oldRefineLevel#, #[].curRefineLevel#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getArtifactBean" parameterClass="long" resultClass="artifactBean">
+        <![CDATA[
+        SELECT id AS id, playType AS playType, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, logDateTime AS logDateTime, PKId AS PKId, artifactRefId AS artifactRefId, positionId AS positionId, oldStrenthenLevel AS oldStrenthenLevel, curStrenthenLevel AS curStrenthenLevel, oldRefineLevel AS oldRefineLevel, curRefineLevel AS curRefineLevel
+        FROM  
+        t_log_artifact
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getArtifactBeanList" parameterClass="java.util.Map" resultClass="artifactBean" remapResults="true">
+        SELECT id AS id, playType AS playType, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, logDateTime AS logDateTime, PKId AS PKId, artifactRefId AS artifactRefId, positionId AS positionId, oldStrenthenLevel AS oldStrenthenLevel, curStrenthenLevel AS curStrenthenLevel, oldRefineLevel AS oldRefineLevel, curRefineLevel AS curRefineLevel
+        FROM
+        t_log_artifact
+        WHERE
+        <![CDATA[ roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time#]]>
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="item_id">
+                <![CDATA[ artifactRefId = #item_id#]]>
+            </isGreaterThan>
+        </dynamic>
+
+        <dynamic prepend="AND">
+            <isEqual compareValue="1" property="op_type">
+                <![CDATA[  changeNum > 0 ]]>
+            </isEqual>
+        </dynamic>
+
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="1" property="op_type">
+            <![CDATA[  changeNum < 0 ]]>
+            </isGreaterThan>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+</sqlMap>

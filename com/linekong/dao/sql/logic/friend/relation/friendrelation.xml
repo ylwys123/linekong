@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FriendRelationBean">
+
+    <typeAlias alias="friendRelationBean" type="com.linekong.dao.sql.logic.friend.FriendRelationBean"/>
+
+	<insert id="addFriendRelationBean" parameterClass="friendRelationBean">
+		INSERT INTO
+		t_game_role_friend_relation
+		(roleId,friendIds,energyFriendIds,rewardEnergyCount,presentEnergyFriendIds)
+		VALUES
+		(#roleId#,#friendIds#,#energyFriendIds#,#rewardEnergyCount#,#presentEnergyFriendIds#)
+	</insert>
+
+	<update id="updateFriendRelationBean" parameterClass="friendRelationBean">
+		UPDATE
+		t_game_role_friend_relation
+		SET roleId = #roleId#, friendIds = #friendIds#, energyFriendIds = #energyFriendIds#, rewardEnergyCount = #rewardEnergyCount#, presentEnergyFriendIds = #presentEnergyFriendIds#
+		WHERE
+		roleId=#roleId#
+	</update>
+
+	<select id="getFriendRelationBean" parameterClass="long" resultClass="friendRelationBean">
+		<![CDATA[
+		SELECT roleId AS roleId, friendIds AS friendIds, energyFriendIds AS energyFriendIds, rewardEnergyCount AS rewardEnergyCount, presentEnergyFriendIds AS presentEnergyFriendIds
+		FROM t_game_role_friend_relation WHERE roleId = #roleId#
+		]]>
+	</select>
+
+</sqlMap>

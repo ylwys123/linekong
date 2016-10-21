@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UserBean">
+
+	<typeAlias alias="userBean" type="com.linekong.dao.sql.logic.user.UserBean" />
+
+	<insert id="addUserBean" parameterClass="userBean">
+		INSERT INTO
+		t_game_user
+		(userId,userName,password,appVersion,deviceName,osInfo,networkReachability,clientMac,lastLoginTime,lastLoginIp,state,userType,vipLevel)
+		VALUES
+		(#userId#,#userName#,#password#,#appVersion#,#deviceName#,#osInfo#,#networkReachability#,#clientMac#,#lastLoginTime#,#lastLoginIp#,#state#,#userType#,#vipLevel#)
+<!-- 		<selectKey resultClass="long" keyProperty="userId">
+			SELECT @@IDENTITY AS userId
+		</selectKey> -->
+	</insert>
+
+	<update id="changeUserBeanState" parameterClass="java.util.Map">
+		UPDATE t_game_user
+		SET state = #state#
+		WHERE userId = #userId#
+	</update>
+
+	<update id="updateUserBean" parameterClass="userBean">
+		UPDATE t_game_user
+		SET userName = #userName#, password = #password#, appVersion = #appVersion#, deviceName = #deviceName#, osInfo = #osInfo#, networkReachability = #networkReachability#, clientMac = #clientMac#, lastLoginTime = #lastLoginTime#,
+		 lastLoginIp = #lastLoginIp#, state = #state#, userType = #userType#, vipLevel = #vipLevel#
+		WHERE userId = #userId#
+	</update>
+
+	<select id="getUserBeanByUserId" parameterClass="long" resultClass="userBean">
+		<![CDATA[
+		SELECT userId AS userId, userName AS userName, password AS password, appVersion AS appVersion, deviceName AS deviceName, osInfo AS osInfo, networkReachability AS networkReachability, clientMac AS clientMac, lastLoginTime AS lastLoginTime, lastLoginIp AS lastLoginIp, state AS state, userType AS userType,
+		    vipLevel AS vipLevel
+		FROM t_game_user WHERE userId = #value#
+		]]>
+	</select>
+
+	<select id="getUserBeanByNameWhenRegist" parameterClass="java.lang.String" resultClass="userBean">
+		<![CDATA[
+		SELECT userId AS userId, userName AS userName, password AS password, appVersion AS appVersion, deviceName AS deviceName, osInfo AS osInfo, networkReachability AS networkReachability, clientMac AS clientMac, lastLoginTime AS
+			lastLoginTime, lastLoginIp AS lastLoginIp, state AS state, userType AS userType,
+		    vipLevel AS vipLevel
+		FROM t_game_user WHERE userName = #value# LIMIT 1
+		]]>
+	</select>
+
+	<select id="getVipLevel" parameterClass="long" resultClass="int">
+		<![CDATA[
+		SELECT vipLevel AS vipLevel
+		FROM t_game_user WHERE userId = #userId#
+		]]>
+	</select>
+
+	<update id="updateUserBeanLoginState" parameterClass="userBean">
+		UPDATE t_game_user
+		SET lastLoginTime = #lastLoginTime#
+		WHERE userId = #userId#
+	</update>
+
+	<update id="clearUserInfo" parameterClass="userBean">
+		UPDATE t_game_user
+		SET userName = #userName#
+		WHERE userId = #userId#
+	</update>
+	
+	<select id="getUserBeanList" resultClass="userBean">
+		<![CDATA[
+		SELECT userId AS userId, userName AS userName, password AS password, appVersion AS appVersion, deviceName AS deviceName, osInfo AS osInfo, networkReachability AS networkReachability, clientMac AS clientMac, lastLoginTime AS lastLoginTime, lastLoginIp AS lastLoginIp, state AS state, userType AS userType,
+		    vipLevel AS vipLevel
+		FROM t_game_user
+		]]>
+	</select>
+
+
+</sqlMap>

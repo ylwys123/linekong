@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="OutfitRefineBean">
+
+    <typeAlias alias="outfitRefineBean" type="com.linekong.dao.sql.log.outfitrefine.OutfitRefineBean" />
+
+    <insert id="addOutfitRefineBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_outfit_refine(userId, roleId, logDateTime, playType, costRefineStone, equipCardRefId, equipCardId, curExp, addExp, beforeLevel, afterLevel, beforeFightNum, afterFightNum, outfitRefId, outfitId, roleLevel, intParam1, strParam1, intParam2, strParam2, intParam3)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].logDateTime#, #[].playType#, #[].costRefineStone#, #[].equipCardRefId#, #[].equipCardId#, #[].curExp#, #[].addExp#, #[].beforeLevel#, #[].afterLevel#, #[].beforeFightNum#, #[].afterFightNum#, #[].outfitRefId#, #[].outfitId#, #[].roleLevel#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].intParam3#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getOutfitRefineBean" parameterClass="long" resultClass="outfitRefineBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, playType AS playType, costRefineStone AS costRefineStone, equipCardRefId AS equipCardRefId, equipCardId AS equipCardId, curExp AS curExp, addExp AS addExp, beforeLevel AS beforeLevel, afterLevel AS afterLevel, beforeFightNum AS beforeFightNum, afterFightNum AS afterFightNum, outfitRefId AS outfitRefId, outfitId AS outfitId, roleLevel AS roleLevel, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_outfit_refine
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getOutfitRefineBeanList" parameterClass="java.util.Map" resultClass="outfitRefineBean" remapResults="true">
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, playType AS playType, costRefineStone AS costRefineStone, equipCardRefId AS equipCardRefId, equipCardId AS equipCardId, curExp AS curExp, addExp AS addExp, beforeLevel AS beforeLevel, afterLevel AS afterLevel, beforeFightNum AS beforeFightNum, afterFightNum AS afterFightNum, outfitRefId AS outfitRefId, outfitId AS outfitId, roleLevel AS roleLevel, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_outfit_refine
+        WHERE
+        <![CDATA[ roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time#]]>
+        
+        <dynamic prepend="AND">
+            <isNotEqual compareValue="-1" property="playType">
+                <![CDATA[  playType = #playType# ]]>
+            </isNotEqual>
+        </dynamic>
+        
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="item_id">
+                <![CDATA[ outfitId = #item_id#]]>
+            </isGreaterThan>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+</sqlMap>

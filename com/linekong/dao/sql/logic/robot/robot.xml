@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RobotBean">
+
+    <typeAlias alias="robotBean" type="com.linekong.dao.sql.logic.robot.RobotBean" />
+
+    <insert id="addRobotBean" parameterClass="robotBean">
+        INSERT INTO
+        t_game_role_robot
+        (roleId, content)
+        VALUES
+        (#roleId#, #content#)
+    </insert>
+
+    <update id="updateRobotBean" parameterClass="robotBean">
+        UPDATE
+        t_game_role_robot
+        SET roleId = #roleId#, content = #content#
+        WHERE
+        roleId = #roleId#
+    </update>
+
+    <delete id="deleteRobotBean" parameterClass="robotBean">
+        DELETE FROM
+        t_game_role_robot WHERE roleId = #roleId#
+    </delete>
+
+    <select id="getRobotBean" parameterClass="long" resultClass="robotBean">
+        <![CDATA[
+        SELECT roleId AS roleId, content AS content
+        FROM  
+        t_game_role_robot
+        WHERE
+        roleId=#roleId#
+        ]]>
+    </select>
+
+    <select id="getRobotBeanList" parameterClass="long" resultClass="robotBean">
+        <![CDATA[
+        SELECT roleId AS roleId, content AS content
+        FROM
+        t_game_role_robot
+        ]]>
+    </select>
+
+</sqlMap>

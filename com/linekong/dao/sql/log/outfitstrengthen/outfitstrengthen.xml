@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="OutfitStrengthenBean">
+
+    <typeAlias alias="outfitStrengthenBean" type="com.linekong.dao.sql.log.outfitstrengthen.OutfitStrengthenBean" />
+
+    <insert id="addOutfitStrengthenBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_outfit_strengthen(userId, roleId, logDateTime, playType, costMoney, outfitRefId, roleLevel, outfitId, beforeLevel, afterLevel, equipCardRefId, equipCardId, intParam1, strParam1, intParam2, strParam2, beforeFightNum, afterFightNum, intParam3)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].logDateTime#, #[].playType#, #[].costMoney#, #[].outfitRefId#, #[].roleLevel#, #[].outfitId#, #[].beforeLevel#, #[].afterLevel#, #[].equipCardRefId#, #[].equipCardId#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].beforeFightNum#, #[].afterFightNum#, #[].intParam3#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getOutfitStrengthenBean" parameterClass="long" resultClass="outfitStrengthenBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, playType AS playType, costMoney AS costMoney, outfitRefId AS outfitRefId, roleLevel AS roleLevel, outfitId AS outfitId, beforeLevel AS beforeLevel, afterLevel AS afterLevel, equipCardRefId AS equipCardRefId, equipCardId AS equipCardId, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, beforeFightNum AS beforeFightNum, afterFightNum AS afterFightNum, intParam3 AS intParam3
+        FROM  
+        t_log_outfit_strengthen
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getOutfitStrengthenBeanList" parameterClass="java.util.Map" resultClass="outfitStrengthenBean" remapResults="true">
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, playType AS playType, costMoney AS costMoney, outfitRefId AS outfitRefId, roleLevel AS roleLevel, outfitId AS outfitId, beforeLevel AS beforeLevel, afterLevel AS afterLevel, equipCardRefId AS equipCardRefId, equipCardId AS equipCardId, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, beforeFightNum AS beforeFightNum, afterFightNum AS afterFightNum, intParam3 AS intParam3
+        FROM  
+        t_log_outfit_strengthen
+        WHERE
+        <![CDATA[ roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time#]]>
+        
+        <dynamic prepend="AND">
+            <isNotEqual compareValue="-1" property="playType">
+                <![CDATA[  playType = #playType# ]]>
+            </isNotEqual>
+        </dynamic>
+        
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="item_id">
+                <![CDATA[ outfitId = #item_id#]]>
+            </isGreaterThan>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+</sqlMap>

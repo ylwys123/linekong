@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GangChapterBean">
+
+	<typeAlias alias="gangChapterBean" type="com.linekong.dao.sql.logic.gangchapter.GangChapterBean"/>
+
+	<insert id="addGangChapterBean" parameterClass="gangChapterBean">
+		INSERT INTO t_game_gang_chapter(
+			gangId, chapterId, killerId, chapterInfo, chapterHistory, rewardReceived
+		)VALUES(
+			#gangId#, #chapterId#, #killerId#, #chapterInfo#, #chapterHistory#, #rewardReceived#
+		)
+	</insert>
+
+	<select id="getGangChapterBeanList" parameterClass="long" resultClass="gangChapterBean">
+		SELECT
+			gangId AS gangId,chapterId AS chapterId,killerId AS killerId,chapterInfo AS chapterInfo,chapterHistory AS chapterHistory,rewardReceived AS rewardReceived
+		FROM t_game_gang_chapter 
+	    WHERE
+		gangId=#value#
+	</select>
+
+	<update id="updateGangChapterBean" parameterClass="gangChapterBean">
+		UPDATE t_game_gang_chapter
+		SET killerId = #killerId#,chapterInfo = #chapterInfo#,chapterHistory = #chapterHistory#,rewardReceived = #rewardReceived#
+		WHERE gangId = #gangId# AND chapterId=#chapterId#
+	</update>
+		
+	<delete id="deleteGangChapterBean" parameterClass="gangChapterBean">
+	    DELETE FROM
+		t_game_gang_chapter WHERE gangId = #gangId# AND chapterId=#chapterId#
+	</delete>
+</sqlMap>

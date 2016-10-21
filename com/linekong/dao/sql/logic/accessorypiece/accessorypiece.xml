@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="AccessoryPieceBean">
+
+	<typeAlias alias="accessoryPieceBean" type="com.linekong.dao.sql.logic.outfitpiece.OutfitPieceBean" />
+
+	<insert id="addAccessoryPieceBean" parameterClass="accessoryPieceBean"> 
+	    INSERT INTO 
+		t_game_role_accessory_piece 
+		(roleId,pieceId,num,effectTime,effectEndTime) 
+		VALUES 
+		(#roleId#,#id#,#num#,#effectTime#,#effectEndTime#)
+	</insert>
+	
+	<select id="getAccessoryPieceBeanList" parameterClass="long" resultClass="accessoryPieceBean">
+		SELECT 
+		roleId AS roleId, pieceId AS id, num AS num ,effectTime AS effectTime, effectEndTime AS effectEndTime
+		FROM t_game_role_accessory_piece 
+		WHERE roleId=#value# 
+	</select>
+	
+	<delete id="deleteAccessoryPieceBean" parameterClass="accessoryPieceBean"> 
+	    DELETE FROM
+		t_game_role_accessory_piece WHERE roleId=#roleId# AND pieceId=#id#
+	</delete>
+	
+	<update id="updateAccessoryPieceBean" parameterClass="accessoryPieceBean"> 
+	    UPDATE
+		t_game_role_accessory_piece 
+		SET num = #num#, effectTime = #effectTime#, effectEndTime = #effectEndTime#
+		WHERE 
+		roleId=#roleId# AND pieceId=#id#
+	</update>
+	
+	<select id="getAllAccessoryPiece" resultClass="accessoryPieceBean">
+		SELECT 
+		roleId AS roleId, pieceId AS id, num AS num ,effectTime AS effectTime, effectEndTime AS effectEndTime
+		FROM t_game_role_accessory_piece
+	</select>
+</sqlMap>

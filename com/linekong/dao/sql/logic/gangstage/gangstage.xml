@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GangStageBean">
+
+	<typeAlias alias="gangStageBean" type="com.linekong.dao.sql.logic.gangstage.GangStageBean" />
+
+	<insert id="addGangStageBean" parameterClass="gangStageBean">
+	    INSERT INTO 
+		t_game_gang_stage 
+		(gangId,currentStageId,maxStageId,maxPassStageId,stageResetType)
+		VALUES 
+		(#gangId#,#currentStageId#,#maxStageId#,#maxPassStageId#,#stageResetType#)
+	</insert>
+
+	<select id="getGangStageBean" parameterClass="long" resultClass="gangStageBean">
+		SELECT 
+		gangId AS gangId, currentStageId AS currentStageId, maxStageId AS maxStageId, maxPassStageId AS maxPassStageId, stageResetType AS stageResetType
+		FROM t_game_gang_stage 
+		WHERE gangId=#value#
+	</select>
+
+	<update id="updateGangStageBean" parameterClass="gangStageBean">
+	    UPDATE
+		t_game_gang_stage 
+		SET currentStageId = #currentStageId#, maxStageId = #maxStageId#, maxPassStageId = #maxPassStageId#, stageResetType = #stageResetType#
+		WHERE 
+		gangId=#gangId#
+	</update>
+	
+	<delete id="deleteGangStageBean" parameterClass="gangStageBean">
+	    DELETE FROM
+		t_game_gang_stage WHERE gangId = #gangId#
+	</delete>
+
+	<select id="getMaxPassStageDescList" parameterClass="int" resultClass="gangStageBean">
+		<![CDATA[
+		SELECT gangId AS gangId, maxPassStageId AS maxPassStageId
+		FROM t_game_gang_stage WHERE maxPassStageId > 0 ORDER BY maxPassStageId DESC LIMIT #limit#
+		]]>
+	</select>
+	
+</sqlMap>

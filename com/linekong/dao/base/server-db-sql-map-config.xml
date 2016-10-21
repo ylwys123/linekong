@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+    <transactionManager type="JDBC">
+        <dataSource type="JNDI">
+            <property name="DataSource" value="/serverdb"/>
+        </dataSource>
+    </transactionManager>
+
+    <sqlMap resource="com/linekong/dao/sql/logic/user/user.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/role/role.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/card/card.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/chapter/chapter.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/outfit/outfit.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/quest/quest.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/item/item.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/cardpiece/cardpiece.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/outfitpiece/outfitpiece.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/stagereward/stagereward.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/rolesetting/rolesetting.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/foster/foster.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/handbook/handbook.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/accessorypiece/accessorypiece.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/wakeup/wakeup.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/wakeup/wakeupequip.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/normalshop/normalshop.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/specialshop/specialshop.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/destiny/destiny.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/rank/pvprank/pvprank.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/practice/practice.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/tower/tower.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/fairypalace/fairypalace.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/roleexorcism/roleexorcism.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/dailytask/dailytaskgeneral.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/friend/apply/friendapply.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/friend/black/friendblack.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/friend/relation/friendrelation.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/reward/reward.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/robot/robot.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/vip/rolevip.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/dropcount/dropcount.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/rank/chapterrank/chapterrank.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/artifact/artifact.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/surplus/rolesurplus.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/timer/roletimer.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/finance/finance.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/mail/mail.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/activityshop/activityshop.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/gang/gang.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/gangmember/gangmember.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/gangapply/gangapply.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/fashion/fashion.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/gangshop/gangshop.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/idgenerator/idgenerator.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/detail/detail.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/taskgather/taskgather.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/taskgatheractivity/taskgatheractivity.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/gangchapter/gangchapter.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/wakeupmark/wakeupmark.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/money/money.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/bindmoney/bindmoney.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/worldboss/worldboss.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/roleboss/roleboss.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/grain/grain.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/grainrecord/grainrecord.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/secretexplore/secretexplore.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/superweapon/superweapon.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/rank/secretexplore/secretexplorerank.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/onlinestat/onlinestat.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/gangstage/gangstage.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/activitysigninday/activitysigninday.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/globaltimer/globaltimer.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/activitycharge/activitycharge.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/activityitem/activityitem.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/tgameglobaldata/tgameglobaldata.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/artifactpiece/artifactpiece.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/varieddata/varieddata.xml"/>
+    <sqlMap resource="com/linekong/dao/sql/logic/chatcache/chatcache.xml"/>
+</sqlMapConfig>

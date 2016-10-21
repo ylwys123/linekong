@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="OutfitDecomposeBean">
+
+    <typeAlias alias="outfitDecomposeBean" type="com.linekong.dao.sql.log.outfitdecompose.OutfitDecomposeBean" />
+
+    <insert id="addOutfitDecomposeBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_outfit_decompose(userId, roleId, logDateTime, outfitRefId, outfitId, awards, roleLevel, intParam1, strParam1, intParam2, strParam2, intParam3)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].logDateTime#, #[].outfitRefId#, #[].outfitId#, #[].awards#, #[].roleLevel#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].intParam3#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getOutfitDecomposeBean" parameterClass="long" resultClass="outfitDecomposeBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, outfitRefId AS outfitRefId, outfitId AS outfitId, awards AS awards, roleLevel AS roleLevel, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_outfit_decompose
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+</sqlMap>

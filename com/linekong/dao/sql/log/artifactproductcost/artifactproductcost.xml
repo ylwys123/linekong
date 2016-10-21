@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ArtifactProductCostBean">
+
+    <typeAlias alias="artifactProductCostBean" type="com.linekong.dao.sql.log.artifactproductcost.ArtifactProductCostBean" />
+
+    <insert id="addArtifactProductCostBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_artifact_product_cost(userId, roleId, logDateTime, roleLevel, artifactId, artifactRefId, strenthenLevel, refineLevel, playType, changeNum, intParam1, strParam1, intParam2, strParam2, intParam3)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].logDateTime#, #[].roleLevel#, #[].artifactId#, #[].artifactRefId#, #[].strenthenLevel#, #[].refineLevel#, #[].playType#, #[].changeNum#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].intParam3#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getArtifactProductCostBean" parameterClass="long" resultClass="artifactProductCostBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, roleLevel AS roleLevel, artifactId AS artifactId, artifactRefId AS artifactRefId, strenthenLevel AS strenthenLevel, refineLevel AS refineLevel, playType AS playType, changeNum AS changeNum, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_artifact_product_cost
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getArtifactProductCostBeanList" parameterClass="java.util.Map" resultClass="artifactProductCostBean" remapResults="true">
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, roleLevel AS roleLevel, artifactId AS artifactId, artifactRefId AS artifactRefId, strenthenLevel AS strenthenLevel, refineLevel AS refineLevel, playType AS playType, changeNum AS changeNum, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM
+        t_log_artifact_product_cost
+        WHERE
+        <![CDATA[ roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time#]]>
+        <dynamic prepend="AND">
+            <isNotEqual compareValue="-1" property="playType">
+                <![CDATA[  playType = #playType# ]]>
+            </isNotEqual>
+        </dynamic>
+        
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="item_id">
+                <![CDATA[ artifactRefId = #item_id#]]>
+            </isGreaterThan>
+        </dynamic>
+
+        <dynamic prepend="AND">
+            <isEqual compareValue="1" property="op_type">
+                <![CDATA[  changeNum > 0 ]]>
+            </isEqual>
+        </dynamic>
+
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="1" property="op_type">
+            <![CDATA[  changeNum < 0 ]]>
+            </isGreaterThan>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+    
+</sqlMap>

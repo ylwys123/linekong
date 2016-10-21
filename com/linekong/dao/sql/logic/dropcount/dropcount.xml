@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DropCountBean">
+
+	<typeAlias alias="dropCountBean" type="com.linekong.dao.sql.logic.dropcount.DropCountBean"/>
+
+	<insert id="addDropCountBean" parameterClass="dropCountBean">
+		INSERT INTO t_game_role_drop_count(
+			roleId, dropCountData
+		)VALUES(
+			#roleId#, #dropCountData#
+		)
+	</insert>
+
+	<select id="getDropCountBean" resultClass="dropCountBean" parameterClass="long">
+		SELECT
+			roleId,
+			dropCountData
+		FROM t_game_role_drop_count 
+		WHERE roleId = #value#
+	</select>
+
+	<update id="updateDropCountBean" parameterClass="dropCountBean">
+		UPDATE t_game_role_drop_count
+		SET
+			dropCountData = #dropCountData#
+		WHERE roleId = #roleId#
+	</update>
+</sqlMap>

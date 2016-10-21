@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="VariedDataBean">
+
+    <typeAlias alias="variedDataBean" type="com.linekong.dao.sql.logic.varieddata.VariedDataBean" />
+
+    <insert id="addVariedDataBean" parameterClass="variedDataBean">
+        INSERT INTO
+        t_game_role_varied_data
+        (roleId, dataType, data)
+        VALUES
+        (#roleId#, #dataType#, #data#)
+    </insert>
+
+    <update id="updateVariedDataBean" parameterClass="variedDataBean">
+        UPDATE
+        t_game_role_varied_data
+        SET roleId = #roleId#, dataType = #dataType#, data = #data#
+        WHERE
+        roleId = #roleId#
+    </update>
+
+    <delete id="deleteVariedDataBean" parameterClass="variedDataBean">
+        DELETE FROM
+        t_game_role_varied_data WHERE roleId = #roleId#
+    </delete>
+
+    <select id="getVariedDataBeanList" parameterClass="long" resultClass="variedDataBean">
+        <![CDATA[
+        SELECT roleId AS roleId, dataType AS dataType, data AS data
+        FROM  
+        t_game_role_varied_data
+        WHERE
+        roleId=#roleId#
+        ]]>
+    </select>
+
+</sqlMap>

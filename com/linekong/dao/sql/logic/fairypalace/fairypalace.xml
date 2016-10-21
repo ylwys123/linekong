@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FairyPalaceBean">
+
+    <typeAlias alias="fairyPalaceBean" type="com.linekong.dao.sql.logic.fairypalace.FairyPalaceBean"/>
+
+	<insert id="addFairyPalaceBean" parameterClass="fairyPalaceBean">
+		INSERT INTO
+		t_game_role_fairy_palace
+		(roleId,refId,cardRefId,patrolModeRefId,patrolProductCount,challengePass,patrolTime,monsterTime,helpedTime,helperRoleId,awardPool,logIds,cardAdvanceLevel)
+		VALUES
+		(#roleId#,#refId#,#cardRefId#,#patrolModeRefId#,#patrolProductCount#,#challengePass#,#patrolTime#,#monsterTime#,#helpedTime#,#helperRoleId#,#awardPool#,#logIds#,#cardAdvanceLevel#)
+	</insert>
+
+	<update id="updateFairyPalaceBean" parameterClass="fairyPalaceBean">
+		UPDATE
+		t_game_role_fairy_palace
+		SET roleId = #roleId#, refId = #refId#, cardRefId = #cardRefId#, patrolModeRefId = #patrolModeRefId#, patrolProductCount = #patrolProductCount#, challengePass = #challengePass#,
+		patrolTime = #patrolTime#, monsterTime = #monsterTime#, helpedTime = #helpedTime#, helperRoleId = #helperRoleId#, awardPool = #awardPool#, logIds = #logIds#, cardAdvanceLevel = #cardAdvanceLevel#
+		WHERE
+		roleId=#roleId# AND refId = #refId#
+	</update>
+
+	<select id="getFairyPalaceBeanList" parameterClass="long" resultClass="fairyPalaceBean">
+		<![CDATA[
+		SELECT roleId AS roleId, refId AS refId, cardRefId AS cardRefId, patrolModeRefId AS patrolModeRefId, patrolProductCount AS patrolProductCount, challengePass AS challengePass,
+		patrolTime AS patrolTime, monsterTime AS monsterTime, helpedTime AS helpedTime, helperRoleId AS helperRoleId, awardPool AS awardPool, logIds AS logIds, cardAdvanceLevel AS cardAdvanceLevel
+		FROM t_game_role_fairy_palace WHERE roleId = #roleId#
+		]]>
+	</select>
+
+</sqlMap>

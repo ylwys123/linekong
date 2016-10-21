@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GrainBean">
+
+    <typeAlias alias="grainBean" type="com.linekong.dao.sql.logic.grain.GrainBean"/>
+
+    <insert id="addGrainBean" parameterClass="grainBean">
+        INSERT INTO
+        t_game_role_grain
+        (roleId, movableGrain, fastenGrain,topTotalGrain,grainState, gangPkId,grainPkId)
+        VALUES
+        (#roleId#, #movableGrain#, #fastenGrain#,#topTotalGrain#,#grainState#,#gangPkId#,#grainPkId#)
+    </insert>
+
+    <update id="updateGrainBean" parameterClass="grainBean">
+        UPDATE
+        t_game_role_grain
+        SET roleId = #roleId#, movableGrain = #movableGrain#, fastenGrain = #fastenGrain#, topTotalGrain = #topTotalGrain#,
+        grainState = #grainState#, gangPkId = #gangPkId#, grainPkId = #grainPkId#
+        WHERE
+        roleId = #roleId#
+    </update>
+
+    <delete id="deleteGrainBean" parameterClass="grainBean">
+        DELETE FROM
+        t_game_role_grain WHERE roleId = #roleId#
+    </delete>
+
+    <select id="getGrainBean" parameterClass="long" resultClass="grainBean">
+        <![CDATA[
+
+        SELECT roleId AS roleId, movableGrain AS movableGrain, fastenGrain AS fastenGrain,
+        topTotalGrain AS topTotalGrain, grainState AS grainState, gangPkId AS gangPkId, grainPkId AS grainPkId
+        FROM  
+        t_game_role_grain
+        WHERE
+        roleId=#roleId#
+
+        ]]>
+    </select>
+
+    <select id="getGrainDescList" parameterClass="int" resultClass="grainBean">
+        <![CDATA[
+
+		SELECT roleId AS roleId, movableGrain AS movableGrain, fastenGrain AS fastenGrain, grainState AS grainState, gangPkId AS gangPkId, grainPkId AS grainPkId
+		FROM t_game_role_grain  where roleId > 0 AND grainState > 0 ORDER BY movableGrain + fastenGrain DESC LIMIT #limit#
+
+        ]]>
+    </select>
+
+
+</sqlMap>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="OutfitBean">
+
+	<typeAlias alias="outfitBean" type="com.linekong.dao.sql.logic.outfit.OutfitBean" />
+
+	<insert id="addOutfitBean" parameterClass="outfitBean"> 
+	    INSERT INTO 
+		t_game_role_outfit 
+		(PKId,gameAreaId,roleId,equipCardId,strengthenLevel,strengthenExp,outfitRefId,refineLevel,refineExp,costMoney,costRefineStone,costRefineRefIds)
+		VALUES 
+		(#PKId#,#gameAreaId#,#roleId#,#equipCardId#,#strengthenLevel#,#strengthenExp#,#outfitRefId#,#refineLevel#,#refineExp#,#costMoney#,#costRefineStone#,#costRefineRefIds#)
+	</insert>
+	
+	<select id="getOutfitBeanList" parameterClass="long" resultClass="outfitBean">
+		SELECT 
+		PKId AS PKId, gameAreaId AS gameAreaId, roleId AS roleId, equipCardId AS equipCardId, strengthenLevel AS strengthenLevel, strengthenExp AS strengthenExp, outfitRefId AS outfitRefId,refineLevel AS refineLevel,refineExp AS refineExp, costMoney AS costMoney, costRefineStone AS costRefineStone, costRefineRefIds AS costRefineRefIds
+		FROM t_game_role_outfit 
+		WHERE roleId=#value# 
+	</select>
+
+	<delete id="deleteOutfitBean" parameterClass="outfitBean"> 
+	    DELETE FROM
+		t_game_role_outfit WHERE PKId=#PKId#
+	</delete>
+	
+	<update id="updateOutfitBean" parameterClass="outfitBean"> 
+	    UPDATE
+		t_game_role_outfit 
+		SET equipCardId = #equipCardId#, strengthenLevel = #strengthenLevel#, strengthenExp = #strengthenExp#, outfitRefId = #outfitRefId#,refineLevel = #refineLevel#,refineExp = #refineExp#, costMoney = #costMoney#, costRefineStone = #costRefineStone#, costRefineRefIds = #costRefineRefIds#
+		WHERE 
+		PKId=#PKId#
+	</update>
+	
+	<update id="updateStrengthenLevel" parameterClass="outfitBean"> 
+	    UPDATE
+		t_game_role_outfit
+		SET strengthenLevel = #strengthenLevel#
+		WHERE
+		PKId=#PKId#
+	</update>
+		
+	<update id="updateEquipCardId" parameterClass="outfitBean"> 
+	    UPDATE
+		t_game_role_outfit
+		SET equipCardId = #equipCardId#
+		WHERE
+		PKId=#PKId#
+	</update>
+		
+</sqlMap>

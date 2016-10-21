@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleExorcismBean">
+
+	<typeAlias alias="roleExorcismBean" type="com.linekong.dao.sql.logic.roleexorcism.RoleExorcismBean"/>
+
+	<insert id="addRoleExorcismBean" parameterClass="roleExorcismBean">
+		INSERT INTO t_game_role_exorcism(
+			roleId, bossLevel, maxDamage, sumDamage, rewardInfo,roleLevel
+		)VALUES(
+			#roleId#, #bossLevel#, #maxDamage#, #sumDamage#, #rewardInfo#,#roleLevel#
+		)
+	</insert>
+
+	<select id="getRoleExorcismBean" resultClass="roleExorcismBean" parameterClass="long">
+		SELECT
+			roleId AS roleId,bossLevel AS bossLevel,maxDamage AS maxDamage,sumDamage AS sumDamage,rewardInfo AS rewardInfo, roleLevel AS roleLevel
+		FROM t_game_role_exorcism 
+		WHERE roleId = #roleId#
+	</select>
+
+	<update id="updateRoleExorcismBean" parameterClass="roleExorcismBean">
+		UPDATE t_game_role_exorcism
+		SET
+			bossLevel = #bossLevel#,maxDamage = #maxDamage#,sumDamage = #sumDamage#,rewardInfo = #rewardInfo#, roleLevel = #roleLevel#
+		WHERE roleId = #roleId#
+	</update>
+
+    <select id="getMaxDamageExorcismDescList" parameterClass="int" resultClass="roleExorcismBean">
+    	<![CDATA[
+		SELECT
+			roleId AS roleId,bossLevel AS bossLevel,maxDamage AS maxDamage,sumDamage AS sumDamage,rewardInfo AS rewardInfo, roleLevel AS roleLevel
+		FROM t_game_role_exorcism
+		WHERE maxDamage > 0 ORDER BY maxDamage DESC LIMIT #limit#
+		]]>
+	</select>
+
+	<select id="getSumDamageExorcismDescList" parameterClass="int" resultClass="roleExorcismBean">
+    	<![CDATA[
+		SELECT
+			roleId AS roleId,bossLevel AS bossLevel,maxDamage AS maxDamage,sumDamage AS sumDamage,rewardInfo AS rewardInfo, roleLevel AS roleLevel
+		FROM t_game_role_exorcism 
+		WHERE sumDamage > 0 ORDER BY sumDamage DESC LIMIT #limit#
+		]]>
+	</select>
+</sqlMap>

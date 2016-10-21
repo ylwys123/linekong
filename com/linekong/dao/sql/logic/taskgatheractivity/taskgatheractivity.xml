@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TaskGatherActivityBean">
+
+    <typeAlias alias="taskGatherActivityBean" type="com.linekong.dao.sql.logic.taskgatheractivity.TaskGatherActivityBean" />
+
+    <insert id="addTaskGatherActivityBean" parameterClass="taskGatherActivityBean">
+        INSERT INTO
+        t_game_role_task_gather_activity
+        (roleId, activityType, tabId, activityPkId, blobData)
+        VALUES
+        (#roleId#, #activityType#, #tabId#, #activityPkId#, #blobData#)
+    </insert>
+
+    <update id="updateTaskGatherActivityBean" parameterClass="taskGatherActivityBean">
+        UPDATE
+        t_game_role_task_gather_activity
+        SET roleId = #roleId#, activityType = #activityType#, tabId = #tabId#, activityPkId = #activityPkId#, blobData = #blobData#
+        WHERE
+        roleId = #roleId# AND activityType = #activityType# AND tabId=#tabId# AND activityPkId=#activityPkId#
+    </update>
+
+    <delete id="deleteTaskGatherActivityBean" parameterClass="taskGatherActivityBean">
+        DELETE FROM
+        t_game_role_task_gather_activity WHERE roleId = #roleId#
+    </delete>
+
+    <select id="getTaskGatherActivityBean" parameterClass="java.util.Map" resultClass="taskGatherActivityBean">
+        <![CDATA[
+        SELECT roleId AS roleId, activityType AS activityType, tabId AS tabId, activityPkId AS activityPkId, blobData AS blobData
+        FROM  
+        t_game_role_task_gather_activity
+        WHERE
+        roleId=#roleId# AND activityType=#activityType# AND tabId=#tabId# AND activityPkId=#activityPkId#
+        ]]>
+    </select>
+
+</sqlMap>

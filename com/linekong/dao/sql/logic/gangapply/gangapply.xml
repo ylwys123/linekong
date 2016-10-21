@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GangApplyBean">
+
+	<typeAlias alias="gangApplyBean" type="com.linekong.dao.sql.logic.gangapply.GangApplyBean" />
+
+	<insert id="addGangApplyBean" parameterClass="gangApplyBean">
+	    INSERT INTO 
+		t_game_gang_apply 
+		(roleId,gangId,applyTime)
+		VALUES 
+		(#roleId#,#gangId#,#applyTime#)
+	</insert>
+
+	<select id="getGangApplyBeanList" resultClass="gangApplyBean">
+		SELECT 
+		roleId AS roleId, gangId AS gangId, applyTime AS applyTime
+		FROM t_game_gang_apply 
+	</select>
+
+	<update id="deleteGangApplyBean" parameterClass="gangApplyBean">
+	    DELETE FROM
+		t_game_gang_apply 
+		WHERE gangId = #gangId# AND roleId=#roleId#
+	</update>
+</sqlMap>

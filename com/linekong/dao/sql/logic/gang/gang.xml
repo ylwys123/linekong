@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GangBean">
+
+	<typeAlias alias="gangBean" type="com.linekong.dao.sql.logic.gang.GangBean" />
+
+	<insert id="addGangBean" parameterClass="gangBean">
+	    INSERT INTO 
+		t_game_gang 
+		(gangId,gameAreaId,name,level,flag,bankroll,schedule,joinSetInfo,logs,message,createTime,state,deleteTime)
+		VALUES 
+		(#gangId#,#gameAreaId#,#name#,#level#,#flag#,#bankroll#,#schedule#,#joinSetInfo#,#logs#,#message#,#createTime#,#state#,#deleteTime#)
+	</insert>
+
+	<select id="getGangBeanList" parameterClass="byte" resultClass="gangBean">
+		SELECT 
+		gangId AS gangId, gameAreaId AS gameAreaId, name AS name, level AS level, flag AS flag, bankroll AS bankroll, schedule AS schedule, joinSetInfo AS joinSetInfo, logs AS logs, message AS message,createTime AS createTime,state AS state,deleteTime AS deleteTime
+		FROM t_game_gang 
+		WHERE state=#value#
+	</select>
+
+	<update id="updateGangBean" parameterClass="gangBean">
+	    UPDATE
+		t_game_gang 
+		SET name = #name#, level = #level#, flag = #flag#, bankroll = #bankroll#, schedule = #schedule#, joinSetInfo = #joinSetInfo#, logs = #logs#, message = #message#, state = #state#, deleteTime = #deleteTime#
+		WHERE 
+		gangId=#gangId#
+	</update>
+
+	<select id="getGangLevelDescList" parameterClass="int" resultClass="gangBean">
+		<![CDATA[
+		SELECT gangId AS gangId, level AS level
+		FROM t_game_gang WHERE state > 0 ORDER BY level DESC LIMIT #limit#
+		]]>
+	</select>
+
+
+</sqlMap>

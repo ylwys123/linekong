@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CardWakeupBean">
+
+    <typeAlias alias="cardWakeupBean" type="com.linekong.dao.sql.log.cardwakeup.CardWakeupBean" />
+
+    <insert id="addCardWakeupBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_card_wakeup(userId, roleId, logDateTime, roleLevel, costMoney, costWakeUpBolus, wakeUpLevel, wakeUpStateLevel, cardId, cardRefId, beforeFightNum, afterFightNum, intParam1, strParam1, intParam2, strParam2, intParam3)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].logDateTime#, #[].roleLevel#, #[].costMoney#, #[].costWakeUpBolus#, #[].wakeUpLevel#, #[].wakeUpStateLevel#, #[].cardId#, #[].cardRefId#, #[].beforeFightNum#, #[].afterFightNum#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].intParam3#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getCardWakeupBean" parameterClass="long" resultClass="cardWakeupBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, roleLevel AS roleLevel, costMoney AS costMoney, costWakeUpBolus AS costWakeUpBolus, wakeUpLevel AS wakeUpLevel, wakeUpStateLevel AS wakeUpStateLevel, cardId AS cardId, cardRefId AS cardRefId, beforeFightNum AS beforeFightNum, afterFightNum AS afterFightNum, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_card_wakeup
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getCardWakeupBeanList" parameterClass="java.util.Map" resultClass="cardWakeupBean" remapResults="true">
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, roleLevel AS roleLevel, costMoney AS costMoney, costWakeUpBolus AS costWakeUpBolus, wakeUpLevel AS wakeUpLevel, wakeUpStateLevel AS wakeUpStateLevel, cardId AS cardId, cardRefId AS cardRefId, beforeFightNum AS beforeFightNum, afterFightNum AS afterFightNum, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_card_wakeup
+        WHERE
+        <![CDATA[ roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time#]]>
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="item_id">
+                <![CDATA[ cardId = #item_id#]]>
+            </isGreaterThan>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+</sqlMap>

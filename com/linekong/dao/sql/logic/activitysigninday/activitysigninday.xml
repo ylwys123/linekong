@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ActivitySigninDayBean">
+
+    <typeAlias alias="activitySigninDayBean" type="com.linekong.dao.sql.logic.activitysigninday.ActivitySigninDayBean" />
+
+    <insert id="addActivitySigninDayBean" parameterClass="activitySigninDayBean">
+        INSERT INTO
+        t_game_role_activity_signin_day
+        (roleId, activityType, day, activityId)
+        VALUES
+        (#roleId#, #activityType#, #day#, #activityId#)
+    </insert>
+
+    <update id="updateActivitySigninDayBean" parameterClass="activitySigninDayBean">
+        UPDATE
+        t_game_role_activity_signin_day
+        SET roleId = #roleId#, activityType = #activityType#, day = #day#, activityId = #activityId#
+        WHERE
+        roleId = #roleId# and activityType = #activityType# and activityType = #activityType#
+    </update>
+
+    <delete id="deleteActivitySigninDayBean" parameterClass="activitySigninDayBean">
+        DELETE FROM
+        t_game_role_activity_signin_day WHERE roleId = #roleId# and activityType = #activityType# and activityType = #activityType#
+    </delete>
+
+    <select id="getActivitySigninDayBeanList" parameterClass="long" resultClass="activitySigninDayBean">
+        <![CDATA[
+        SELECT roleId AS roleId, activityType AS activityType, day AS day, activityId AS activityId
+        FROM  
+        t_game_role_activity_signin_day
+        WHERE
+        roleId=#roleId#
+        ]]>
+    </select>
+
+</sqlMap>

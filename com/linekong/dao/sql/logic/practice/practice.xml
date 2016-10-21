@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PracticeBean">
+
+    <typeAlias alias="practiceBean" type="com.linekong.dao.sql.logic.practice.PracticeBean"/>
+
+    <insert id="addPracticeBean" parameterClass="practiceBean">
+		INSERT INTO
+		t_game_role_practice
+		(roleId,floor)
+		VALUES
+		(#roleId#,#floor#)
+	</insert>
+
+    <update id="updatePracticeBean" parameterClass="practiceBean">
+		UPDATE
+		t_game_role_practice
+		SET roleId = #roleId#, floor = #floor#
+		WHERE
+		roleId=#roleId#
+	</update>
+
+    <select id="getPracticeBean" parameterClass="long" resultClass="practiceBean">
+		<![CDATA[
+		SELECT roleId AS roleId, floor AS floor
+		FROM t_game_role_practice
+		WHERE roleId =#roleId#
+        ]]>
+	</select>
+
+</sqlMap>

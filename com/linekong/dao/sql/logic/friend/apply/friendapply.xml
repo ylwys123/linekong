@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FriendApplyBean">
+
+    <typeAlias alias="friendApplyBean" type="com.linekong.dao.sql.logic.friend.FriendApplyBean"/>
+
+	<insert id="addFriendApplyBean" parameterClass="friendApplyBean">
+		INSERT INTO
+		t_game_role_friend_apply
+		(roleId,applies,toOtherApplies)
+		VALUES
+		(#roleId#,#applies#,#toOtherApplies#)
+	</insert>
+
+	<update id="updateFriendApplyBean" parameterClass="friendApplyBean">
+		UPDATE
+		t_game_role_friend_apply
+		SET roleId = #roleId#, applies = #applies#, toOtherApplies = #toOtherApplies#
+		WHERE
+		roleId=#roleId#
+	</update>
+
+
+	<select id="getFriendApplyBean" parameterClass="long" resultClass="friendApplyBean">
+		<![CDATA[
+		SELECT roleId AS roleId, applies AS applies, toOtherApplies AS toOtherApplies
+		FROM t_game_role_friend_apply WHERE roleId = #roleId#
+		]]>
+	</select>
+
+</sqlMap>

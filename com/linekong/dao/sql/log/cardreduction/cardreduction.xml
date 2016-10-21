@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CardReductionBean">
+
+    <typeAlias alias="cardReductionBean" type="com.linekong.dao.sql.log.cardreduction.CardReductionBean" />
+
+    <insert id="addCardReductionBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_card_reduction(userId, roleId, logDateTime, roleLevel, costMoney, cardRefId, awards, cardId, intParam1, strParam1, intParam2, strParam2, intParam3)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].logDateTime#, #[].roleLevel#, #[].costMoney#, #[].cardRefId#, #[].awards#, #[].cardId#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].intParam3#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getCardReductionBean" parameterClass="long" resultClass="cardReductionBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, roleLevel AS roleLevel, costMoney AS costMoney, cardRefId AS cardRefId, awards AS awards, cardId AS cardId, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_card_reduction
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getCardReductionBeanList" parameterClass="java.util.Map" resultClass="cardReductionBean" remapResults="true">
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, roleLevel AS roleLevel, costMoney AS costMoney, cardRefId AS cardRefId, awards AS awards, cardId AS cardId, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_card_reduction
+        WHERE
+        <![CDATA[ roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time#]]>
+        <dynamic prepend="AND">
+            <isGreaterThan compareValue="0" property="item_id">
+                <![CDATA[ cardId = #item_id#]]>
+            </isGreaterThan>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+</sqlMap>

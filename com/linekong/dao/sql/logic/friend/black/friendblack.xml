@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FriendBlackBean">
+
+    <typeAlias alias="friendBlackBean" type="com.linekong.dao.sql.logic.friend.FriendBlackBean"/>
+
+	<insert id="addFriendBlackBean" parameterClass="friendBlackBean">
+		INSERT INTO
+		t_game_role_friend_black
+		(roleId,blackFriendIds)
+		VALUES
+		(#roleId#,#blackFriendIds#)
+	</insert>
+
+	<update id="updateFriendBlackBean" parameterClass="friendBlackBean">
+		UPDATE
+		t_game_role_friend_black
+		SET roleId = #roleId#, blackFriendIds = #blackFriendIds#
+		WHERE
+		roleId=#roleId#
+	</update>
+
+	<select id="getFriendBlackBean" parameterClass="long" resultClass="friendBlackBean">
+		<![CDATA[
+		SELECT roleId AS roleId, blackFriendIds AS blackFriendIds
+		FROM t_game_role_friend_black WHERE roleId = #roleId#
+		]]>
+	</select>
+
+</sqlMap>

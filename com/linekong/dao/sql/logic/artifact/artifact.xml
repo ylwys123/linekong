@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="artifactBean">
+
+	<typeAlias alias="artifactBean" type="com.linekong.dao.sql.logic.artifact.ArtifactBean" />
+
+	<insert id="addArtifactBean" parameterClass="artifactBean">
+	    INSERT INTO 
+		t_game_role_artifact 
+		(PKId,gameAreaId,roleId,artifactRefId,positionId,strengthenLevel,refineLevel,quality,ride)
+		VALUES 
+		(#PKId#,#gameAreaId#,#roleId#,#artifactRefId#,#positionId#,#strengthenLevel#,#refineLevel#,#quality#,#ride#)
+	</insert>
+
+	<select id="getArtifactBeanList" parameterClass="long" resultClass="artifactBean">
+		SELECT 
+		PKId AS PKId, gameAreaId AS gameAreaId, roleId AS roleId,artifactRefId AS artifactRefId, positionId AS positionId, strengthenLevel AS strengthenLevel, refineLevel AS refineLevel, quality AS quality, ride AS ride
+		FROM t_game_role_artifact 
+		WHERE roleId=#value# 
+	</select>
+
+	<select id="getArtifactBean" parameterClass="long" resultClass="artifactBean">
+		SELECT 
+		PKId AS PKId, gameAreaId AS gameAreaId, roleId AS roleId,artifactRefId AS artifactRefId, positionId AS positionId, strengthenLevel AS strengthenLevel, refineLevel AS refineLevel, quality AS quality, ride AS ride
+		FROM t_game_role_artifact 
+		WHERE
+		PKId=#value#
+	</select>
+
+	<update id="updateArtifactBean" parameterClass="artifactBean">
+	    UPDATE
+		t_game_role_artifact 
+		SET positionId = #positionId#, strengthenLevel = #strengthenLevel#, refineLevel = #refineLevel#, quality = #quality#, ride = #ride#
+		WHERE 
+		PKId=#PKId#
+	</update>
+
+	<delete id="deleteArtifactBean" parameterClass="artifactBean">
+	    DELETE FROM
+		t_game_role_artifact WHERE PKId=#PKId#
+	</delete>
+
+</sqlMap>

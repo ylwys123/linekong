@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PvpRankInfoBean">
+
+    <typeAlias alias="pvpRankInfoBean" type="com.linekong.dao.sql.logic.rank.pvprank.PvpRankInfoBean"/>
+
+    <insert id="addPvpRankBean" parameterClass="pvpRankInfoBean">
+		INSERT INTO
+		t_game_role_pvp_rank
+		(roleId,rankValue,robotName)
+		VALUES
+		(#roleId#,#comparableValue#,#robotName#)
+	</insert>
+
+    <update id="updatePvpRankBean" parameterClass="pvpRankInfoBean">
+		UPDATE
+		t_game_role_pvp_rank
+		SET roleId = #roleId#, rankValue = #comparableValue#, robotName = #robotName#
+		WHERE
+		roleId=#roleId#
+	</update>
+
+    <select id="getPvpRankBeanList" resultClass="pvpRankInfoBean">
+		<![CDATA[
+		SELECT roleId AS roleId, rankValue AS comparableValue, robotName AS robotName
+		FROM t_game_role_pvp_rank
+        ]]>
+	</select>
+
+	<delete id="deletePvpRankBean" parameterClass="pvpRankInfoBean">
+		DELETE FROM
+		t_game_role_pvp_rank WHERE roleId=#roleId#
+	</delete>
+
+</sqlMap>

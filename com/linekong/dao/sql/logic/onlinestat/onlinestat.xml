@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="OnlineStatBean">
+
+	<typeAlias alias="onlineStatBean" type="com.linekong.dao.sql.logic.onlinestat.OnlineStatBean"/>
+
+	<insert id="addOnlineStatBean" parameterClass="onlineStatBean">
+		INSERT INTO online_stat(
+			server_id, online_number, update_time
+		)VALUES(
+			#server_id#, #online_number#, now()
+		)
+	</insert>
+
+	<select id="getOnlineStatBean" resultClass="onlineStatBean" parameterClass="long">
+		SELECT
+			server_id AS server_id,online_number AS online_number,update_time AS update_time
+		FROM online_stat 
+		WHERE server_id = #server_id#
+	</select>
+
+	<update id="updateOnlineStatBean" parameterClass="onlineStatBean">
+		UPDATE online_stat
+		SET
+			online_number = #online_number#,update_time = now()
+		WHERE server_id = #server_id#
+	</update>
+</sqlMap>

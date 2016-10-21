@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DestinyBean">
+
+    <typeAlias alias="destinyBean" type="com.linekong.dao.sql.logic.destiny.DestinyBean"/>
+
+	<insert id="addDestinyBean" parameterClass="destinyBean">
+		INSERT INTO
+		t_game_role_destiny
+		(roleId,cardId,level,exp)
+		VALUES
+		(#roleId#,#cardId#,#level#,#exp#)
+	</insert>
+
+	<update id="updateDestinyBean" parameterClass="destinyBean">
+		UPDATE
+		t_game_role_destiny
+		SET roleId = #roleId#, cardId = #cardId#, level = #level#, exp = #exp#
+		WHERE
+		roleId=#roleId# AND cardId = #cardId#
+	</update>
+
+	<select id="getDestinyBeanList" parameterClass="long" resultClass="destinyBean">
+		<![CDATA[
+		SELECT roleId AS roleId, cardId AS cardId, level AS level, exp AS exp
+		FROM t_game_role_destiny WHERE roleId = #roleId#
+		]]>
+	</select>
+
+	<delete id="deleteDestinyBean" parameterClass="destinyBean">
+		DELETE FROM
+		t_game_role_destiny WHERE roleId=#roleId# AND cardId=#cardId#
+	</delete>
+</sqlMap>

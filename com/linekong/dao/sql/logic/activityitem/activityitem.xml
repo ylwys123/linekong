@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ActivityItemBean">
+
+    <typeAlias alias="activityItemBean" type="com.linekong.dao.sql.logic.activityitem.ActivityItemBean" />
+
+    <insert id="addActivityItemBean" parameterClass="activityItemBean">
+        INSERT INTO
+        t_game_role_activity_item
+        (PKId, gameAreaId, roleId, activityType, activityPkId, tabId, guId, state, ownerTime, userTime, validDay, ownCount)
+        VALUES
+        (#PKId#, #gameAreaId#, #roleId#, #activityType#, #activityPkId#, #tabId#, #guId#, #state#, #ownerTime#, #userTime#, #validDay#, #ownCount#)
+    </insert>
+
+    <update id="updateActivityItemBean" parameterClass="activityItemBean">
+        UPDATE
+        t_game_role_activity_item
+        SET PKId = #PKId#, gameAreaId = #gameAreaId#, roleId = #roleId#, activityType = #activityType#, activityPkId = #activityPkId#,
+         tabId = #tabId#, guId = #guId#, state = #state#, ownerTime = #ownerTime#, userTime = #userTime#, validDay = #validDay#, ownCount = #ownCount#
+        WHERE
+        PKId = #PKId#
+    </update>
+
+    <delete id="deleteActivityItemBean" parameterClass="activityItemBean">
+        DELETE FROM
+        t_game_role_activity_item WHERE PKId = #PKId#
+    </delete>
+
+    <select id="getActivityItemBeanList" parameterClass="java.util.Map" resultClass="activityItemBean">
+        <![CDATA[
+        SELECT PKId AS PKId, gameAreaId AS gameAreaId, roleId AS roleId, activityType AS activityType, activityPkId AS activityPkId, tabId AS tabId, guId AS guId,
+        state AS state, ownerTime AS ownerTime, userTime AS userTime, validDay AS validDay, ownCount AS ownCount
+        FROM  
+        t_game_role_activity_item
+        WHERE
+        roleId=#roleId# AND activityType=#activityType# AND activityPkId=#activityPkId# AND tabId=#tabId#
+        ]]>
+    </select>
+
+</sqlMap>

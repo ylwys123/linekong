@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BindMoneyBean">
+
+    <typeAlias alias="bindMoneyBean" type="com.linekong.dao.sql.log.bindmoney.BindMoneyBean" />
+
+    <insert id="addBindMoneyBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_bind_money(userId, roleId, logDateTime, playType, changeNum, oldNum, newNum, roleLevel, intParam1, strParam1, intParam2, strParam2, intParam3)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].logDateTime#, #[].playType#, #[].changeNum#, #[].oldNum#, #[].newNum#, #[].roleLevel#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].intParam3#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getBindMoneyBean" parameterClass="long" resultClass="bindMoneyBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, logDateTime AS logDateTime, playType AS playType, changeNum AS changeNum, oldNum AS oldNum, newNum AS newNum, roleLevel AS roleLevel, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, intParam3 AS intParam3
+        FROM  
+        t_log_bind_money
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+    <select id="getBindMoneyBeanList" parameterClass="java.util.Map" resultClass="bindMoneyBean">
+        SELECT id AS id, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, logDateTime AS logDateTime, playType AS playType, changeNum AS changeNum, oldNum AS oldNum, newNum AS newNum
+        FROM
+        t_log_bind_money
+        WHERE
+        <![CDATA[  roleId = #roleId# AND  logDateTime >= #start_time# AND logDateTime <= #end_time# ]]>
+        <dynamic prepend="AND">
+            <isNotEqual compareValue="-1" property="op_type">
+                <![CDATA[  playType = #op_type# ]]>
+            </isNotEqual>
+        </dynamic>
+        LIMIT #offSet# , #perPageCount#
+    </select>
+
+</sqlMap>

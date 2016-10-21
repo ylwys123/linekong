@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DailyTaskGeneralBean">
+
+    <typeAlias alias="dailyTaskGeneralBean" type="com.linekong.dao.sql.logic.dailytask.DailyTaskGeneralBean"/>
+
+    <insert id="addDailyTaskGeneralBean" parameterClass="dailyTaskGeneralBean">
+	    INSERT INTO 
+		t_game_role_daily_task_general
+		(roleId,refDailyTaskGeneralId,score,hasExchangeIndex)
+		VALUES 
+		(#roleId#,#refDailyTaskGeneralId#,#score#,#hasExchangeIndex#)
+	</insert>
+
+    <update id="updateDailyTaskGeneralBean" parameterClass="dailyTaskGeneralBean">
+	    UPDATE
+		t_game_role_daily_task_general
+		SET roleId = #roleId#, refDailyTaskGeneralId = #refDailyTaskGeneralId#, score = #score#, hasExchangeIndex = #hasExchangeIndex#
+		WHERE 
+		roleId=#roleId#
+	</update>
+
+    <select id="getDailyTaskGeneralByRoleId" parameterClass="long" resultClass="dailyTaskGeneralBean">
+		<![CDATA[
+		SELECT roleId AS roleId, refDailyTaskGeneralId AS refDailyTaskGeneralId, score AS score, hasExchangeIndex AS hasExchangeIndex
+		FROM t_game_role_daily_task_general WHERE roleId = #roleId#
+		]]>
+	</select>
+
+</sqlMap>

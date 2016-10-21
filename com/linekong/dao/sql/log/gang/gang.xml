@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GangBean">
+
+    <typeAlias alias="gangBean" type="com.linekong.dao.sql.log.gang.GangBean" />
+
+    <insert id="addGangBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_gang(gangId, gangLevel, logDateTime, gangLeaderId, intParam1, intParam2, intParam3, strParam1, strParam2, operation)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].gangId#, #[].gangLevel#, #[].logDateTime#, #[].gangLeaderId#, #[].intParam1#, #[].intParam2#, #[].intParam3#, #[].strParam1#, #[].strParam2#, #[].operation#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getGangBean" parameterClass="long" resultClass="gangBean">
+        <![CDATA[
+        SELECT id AS id, gangId AS gangId, gangLevel AS gangLevel, logDateTime AS logDateTime, gangLeaderId AS gangLeaderId, intParam1 AS intParam1, intParam2 AS intParam2, intParam3 AS intParam3, strParam1 AS strParam1, strParam2 AS strParam2, operation AS operation
+        FROM  
+        t_log_gang
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+</sqlMap>

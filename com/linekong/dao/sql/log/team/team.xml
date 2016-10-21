@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TeamBean">
+
+    <typeAlias alias="teamBean" type="com.linekong.dao.sql.log.team.TeamBean" />
+
+    <insert id="addTeamBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_team(userId, roleId, roleLevel, logDateTime, intParam1, strParam1, intParam2, strParam2, operate, intParam3)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].roleId#, #[].roleLevel#, #[].logDateTime#, #[].intParam1#, #[].strParam1#, #[].intParam2#, #[].strParam2#, #[].operate#, #[].intParam3#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getTeamBean" parameterClass="long" resultClass="teamBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, roleId AS roleId, roleLevel AS roleLevel, logDateTime AS logDateTime, intParam1 AS intParam1, strParam1 AS strParam1, intParam2 AS intParam2, strParam2 AS strParam2, operate AS operate, intParam3 AS intParam3
+        FROM  
+        t_log_team
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+</sqlMap>

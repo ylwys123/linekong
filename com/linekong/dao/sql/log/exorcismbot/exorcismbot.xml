@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ExorcismBotBean">
+
+    <typeAlias alias="exorcismBotBean" type="com.linekong.dao.sql.log.exorcismbot.ExorcismBotBean" />
+
+    <insert id="addExorcismBotBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_exorcism_bot(botId, operation, lodDataTime, intParam1, intParam2, intParam3, strParam1, strParam2)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].botId#, #[].operation#, #[].lodDataTime#, #[].intParam1#, #[].intParam2#, #[].intParam3#, #[].strParam1#, #[].strParam2#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getExorcismBotBean" parameterClass="long" resultClass="exorcismBotBean">
+        <![CDATA[
+        SELECT id AS id, botId AS botId, operation AS operation, lodDataTime AS lodDataTime, intParam1 AS intParam1, intParam2 AS intParam2, intParam3 AS intParam3, strParam1 AS strParam1, strParam2 AS strParam2
+        FROM  
+        t_log_exorcism_bot
+        WHERE
+        id=#id#
+        ]]>
+    </select>
+
+</sqlMap>

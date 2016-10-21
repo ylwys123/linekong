@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="LoginBean">
+
+    <typeAlias alias="loginBean" type="com.linekong.dao.sql.log.login.LoginBean" />
+
+    <insert id="addLoginBean" parameterClass="java.util.List">
+        <![CDATA[
+        insert into t_log_login(userId, logDateTime, appVersion, deviceName, osInfo, networkReachability, ip, state)values
+        ]]>
+        <iterate conjunction=",">
+        <![CDATA[
+        (#[].userId#, #[].logDateTime#, #[].appVersion#, #[].deviceName#, #[].osInfo#, #[].networkReachability#, #[].ip#, #[].state#)
+        ]]>
+        </iterate>
+    </insert>
+
+    <select id="getLoginBean" parameterClass="long" resultClass="loginBean">
+        <![CDATA[
+        SELECT id AS id, userId AS userId, logDateTime AS logDateTime, appVersion AS appVersion, deviceName AS deviceName, osInfo AS osInfo, networkReachability AS networkReachability, ip AS ip, state AS state
+        FROM  
+        t_log_login
+        WHERE
+        userId=#userId#
+        ]]>
+    </select>
+
+</sqlMap>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleNormalShopBean">
+
+	<typeAlias alias="roleNormalShopBean" type="com.linekong.dao.sql.logic.normalshop.RoleNormalShopBean"/>
+
+	<insert id="addRoleNormalShopBean" parameterClass="roleNormalShopBean">
+		INSERT INTO t_game_role_shop_normal(
+			roleId, dailyBuyInfo, totalBuyInfo
+		)VALUES(
+			#roleId#, #dailyBuyInfo#, #totalBuyInfo#
+		)
+	</insert>
+
+	<select id="getRoleNormalShopBean" resultClass="roleNormalShopBean" parameterClass="long">
+		SELECT
+			roleId AS roleId,
+			dailyBuyInfo AS dailyBuyInfo,totalBuyInfo AS totalBuyInfo
+		FROM t_game_role_shop_normal 
+		WHERE roleId = #value#
+	</select>
+
+	<update id="updateRoleNormalShopBean" parameterClass="roleNormalShopBean">
+		UPDATE t_game_role_shop_normal
+		SET
+			dailyBuyInfo = #dailyBuyInfo#,totalBuyInfo = #totalBuyInfo#
+		WHERE roleId = #roleId#
+	</update>
+</sqlMap>

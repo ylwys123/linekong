@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FashionBean">
+
+    <typeAlias alias="fashionBean" type="com.linekong.dao.sql.logic.fashion.FashionBean" />
+
+    <insert id="addFashionBean" parameterClass="fashionBean">
+        INSERT INTO
+        t_game_role_fashion
+        (PKId,gameAreaId,roleId, fashionRefId, strengthenLevel, equipCardId)
+        VALUES
+        (#PKId#,#gameAreaId#,#roleId#, #fashionRefId#, #strengthenLevel#, #equipCardId#)
+    </insert>
+
+    <update id="updateFashionBean" parameterClass="fashionBean">
+        UPDATE
+        t_game_role_fashion
+        SET roleId = #roleId#, fashionRefId = #fashionRefId#, strengthenLevel = #strengthenLevel#, equipCardId = #equipCardId#
+        WHERE
+        PKId = #PKId#
+    </update>
+
+    <delete id="deleteFashionBean" parameterClass="fashionBean">
+        DELETE FROM
+        t_game_role_fashion WHERE PKId = #PKId#
+    </delete>
+
+    <select id="getFashionBeanList" parameterClass="long" resultClass="fashionBean">
+        <![CDATA[
+        SELECT PKId AS PKId, gameAreaId AS gameAreaId, roleId AS roleId, fashionRefId AS fashionRefId, strengthenLevel AS strengthenLevel, equipCardId AS equipCardId
+        FROM  
+        t_game_role_fashion
+        WHERE
+        roleId=#roleId#
+        ]]>
+    </select>
+
+</sqlMap>

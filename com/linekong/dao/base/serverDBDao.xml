@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE daoConfig
+        PUBLIC "-//ibatis.apache.org//DTD DAO Configuration 2.0//EN"
+        "http://ibatis.apache.org/dtd/dao-2.dtd">
+
+<daoConfig>
+
+    <context>
+
+        <transactionManager type="SQLMAP">
+            <property name="SqlMapConfigResource"
+                      value="com/linekong/dao/base/server-db-sql-map-config.xml"/>
+        </transactionManager>
+
+        <dao implementation="com.linekong.dao.sql.logic.user.UserDao"
+             interface="com.linekong.dao.sql.logic.user.IUserDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.role.RoleDao"
+             interface="com.linekong.dao.sql.logic.role.IRoleDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.card.CardDao"
+             interface="com.linekong.dao.sql.logic.card.ICardDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.chapter.ChapterDao"
+             interface="com.linekong.dao.sql.logic.chapter.IChapterDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.outfit.OutfitDao"
+             interface="com.linekong.dao.sql.logic.outfit.IOutfitDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.quest.QuestDao"
+             interface="com.linekong.dao.sql.logic.quest.IQuestDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.item.ItemDao"
+             interface="com.linekong.dao.sql.logic.item.IItemDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.cardpiece.CardPieceDao"
+             interface="com.linekong.dao.sql.logic.cardpiece.ICardPieceDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.outfitpiece.OutfitPieceDao"
+             interface="com.linekong.dao.sql.logic.outfitpiece.IOutfitPieceDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.stagereward.StageRewardDao"
+             interface="com.linekong.dao.sql.logic.stagereward.IStageRewardDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.rolesetting.RoleSettingDao"
+             interface="com.linekong.dao.sql.logic.rolesetting.IRoleSettingDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.foster.FosterDao"
+             interface="com.linekong.dao.sql.logic.foster.IFosterDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.handbook.HandbookDao"
+             interface="com.linekong.dao.sql.logic.handbook.IHandbookDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.accessorypiece.AccessoryPieceDao"
+             interface="com.linekong.dao.sql.logic.accessorypiece.IAccessoryPieceDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.wakeup.WakeUpDao"
+             interface="com.linekong.dao.sql.logic.wakeup.IWakeUpDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.wakeup.WakeUpEquipDao"
+             interface="com.linekong.dao.sql.logic.wakeup.IWakeUpEquipDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.normalshop.NormalShopDao"
+             interface="com.linekong.dao.sql.logic.normalshop.INormalShopDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.specialshop.SpecialShopDao"
+             interface="com.linekong.dao.sql.logic.specialshop.ISpecialShopDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.destiny.DestinyDao"
+             interface="com.linekong.dao.sql.logic.destiny.IDestinyDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.rank.pvprank.PvpRankDao"
+             interface="com.linekong.dao.sql.logic.rank.pvprank.IPvpRankDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.practice.PracticeDao"
+             interface="com.linekong.dao.sql.logic.practice.IPracticeDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.tower.TowerDao"
+             interface="com.linekong.dao.sql.logic.tower.ITowerDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.fairypalace.FairyPalaceDao"
+             interface="com.linekong.dao.sql.logic.fairypalace.IFairyPalaceDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.roleexorcism.RoleExorcismDao"
+             interface="com.linekong.dao.sql.logic.roleexorcism.IRoleExorcismDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.dailytask.DailyTaskDao"
+             interface="com.linekong.dao.sql.logic.dailytask.IDailyTaskDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.friend.apply.FriendApplyDao"
+             interface="com.linekong.dao.sql.logic.friend.apply.IFriendApplyDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.friend.black.FriendBlackDao"
+             interface="com.linekong.dao.sql.logic.friend.black.IFriendBlackDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.friend.relation.FriendRelationDao"
+             interface="com.linekong.dao.sql.logic.friend.relation.IFriendRelationDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.reward.RewardDao"
+             interface="com.linekong.dao.sql.logic.reward.IRewardDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.robot.RobotDao"
+             interface="com.linekong.dao.sql.logic.robot.IRobotDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.vip.RoleVipDao"
+             interface="com.linekong.dao.sql.logic.vip.IRoleVipDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.dropcount.DropCountDao"
+             interface="com.linekong.dao.sql.logic.dropcount.IDropCountDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.rank.chapterrank.ChapterRankDao"
+             interface="com.linekong.dao.sql.logic.rank.chapterrank.IChapterRankDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.artifact.ArtifactDao"
+             interface="com.linekong.dao.sql.logic.artifact.IArtifactDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.surplus.RoleSurplusDao"
+             interface="com.linekong.dao.sql.logic.surplus.IRoleSurplusDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.timer.RoleTimerDao"
+             interface="com.linekong.dao.sql.logic.timer.IRoleTimerDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.finance.FinanceDao"
+             interface="com.linekong.dao.sql.logic.finance.IFinanceDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.mail.MailDao"
+             interface="com.linekong.dao.sql.logic.mail.IMailDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.activityshop.ActivityShopDao"
+             interface="com.linekong.dao.sql.logic.activityshop.IActivityShopDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.gang.GangDao"
+             interface="com.linekong.dao.sql.logic.gang.IGangDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.gangmember.GangMemberDao"
+             interface="com.linekong.dao.sql.logic.gangmember.IGangMemberDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.gangapply.GangApplyDao"
+             interface="com.linekong.dao.sql.logic.gangapply.IGangApplyDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.fashion.FashionDao"
+             interface="com.linekong.dao.sql.logic.fashion.IFashionDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.gangshop.GangShopDao"
+             interface="com.linekong.dao.sql.logic.gangshop.IGangShopDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.idgenerator.IDGeneratorDao"
+             interface="com.linekong.dao.sql.logic.idgenerator.IIDGeneratorDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.detail.DetailDao"
+             interface="com.linekong.dao.sql.logic.detail.IDetailDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.taskgather.TaskGatherDao"
+             interface="com.linekong.dao.sql.logic.taskgather.ITaskGatherDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.taskgatheractivity.TaskGatherActivityDao"
+             interface="com.linekong.dao.sql.logic.taskgatheractivity.ITaskGatherActivityDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.gangchapter.GangChapterDao"
+             interface="com.linekong.dao.sql.logic.gangchapter.IGangChapterDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.wakeupmark.WakeUpMarkDao"
+             interface="com.linekong.dao.sql.logic.wakeupmark.IWakeUpMarkDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.money.LogicMoneyDao"
+             interface="com.linekong.dao.sql.logic.money.ILogicMoneyDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.bindmoney.LogicBindMoneyDao"
+             interface="com.linekong.dao.sql.logic.bindmoney.ILogicBindMoneyDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.worldboss.WorldBossDao"
+             interface="com.linekong.dao.sql.logic.worldboss.IWorldBossDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.roleboss.RoleBossDao"
+             interface="com.linekong.dao.sql.logic.roleboss.IRoleBossDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.grain.GrainDao"
+             interface="com.linekong.dao.sql.logic.grain.IGrainDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.grainrecord.GrainRecordDao"
+             interface="com.linekong.dao.sql.logic.grainrecord.IGrainRecordDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.secretexplore.SecretExploreDao"
+             interface="com.linekong.dao.sql.logic.secretexplore.ISecretExploreDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.superweapon.SuperWeaponDao"
+             interface="com.linekong.dao.sql.logic.superweapon.ISuperWeaponDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.rank.secretexplore.SecretExploreRankDao"
+             interface="com.linekong.dao.sql.logic.rank.secretexplore.ISecretExploreRankDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.onlinestat.OnlineStatDao"
+             interface="com.linekong.dao.sql.logic.onlinestat.IOnlineStatDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.gangstage.GangStageDao"
+             interface="com.linekong.dao.sql.logic.gangstage.IGangStageDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.activitysigninday.ActivitySigninDayDao"
+             interface="com.linekong.dao.sql.logic.activitysigninday.IActivitySigninDayDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.globaltimer.GlobalTimerDao"
+             interface="com.linekong.dao.sql.logic.globaltimer.IGlobalTimerDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.activitycharge.ActivityChargeDao"
+             interface="com.linekong.dao.sql.logic.activitycharge.IActivityChargeDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.activityitem.ActivityItemDao"
+             interface="com.linekong.dao.sql.logic.activityitem.IActivityItemDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.tgameglobaldata.TGameGlobalDataDao"
+             interface="com.linekong.dao.sql.logic.tgameglobaldata.ITGameGlobalDataDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.artifactpiece.ArtifactPieceDao"
+             interface="com.linekong.dao.sql.logic.artifactpiece.IArtifactPieceDao"/>
+        <dao implementation="com.linekong.dao.sql.logic.varieddata.VariedDataDao"
+             interface="com.linekong.dao.sql.logic.varieddata.IVariedDataDao"/>
+		<dao implementation="com.linekong.dao.sql.logic.chatcache.ChatCacheDao"
+             interface="com.linekong.dao.sql.logic.chatcache.IChatCacheDao"/>
+    </context>
+</daoConfig>

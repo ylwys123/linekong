@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FosterBean">
+
+    <typeAlias alias="fosterBean" type="com.linekong.dao.sql.logic.foster.FosterBean"/>
+
+    <insert id="addFosterBean" parameterClass="fosterBean">
+	    INSERT INTO 
+		t_game_role_foster
+		(roleId,cardId,hp,attack,phyDefense,magDefense,hpChange,attackChange,phyDefenseChange,magDefenseChange,fosterCount)
+		VALUES 
+		(#roleId#,#cardId#,#hp#,#attack#,#phyDefense#,#magDefense#,#hpChange#,#attackChange#,#phyDefenseChange#,#magDefenseChange#,#fosterCount#)
+	</insert>
+
+    <update id="updateFosterBean" parameterClass="fosterBean">
+	    UPDATE
+		t_game_role_foster
+		SET roleId = #roleId#,cardId = #cardId#, hp = #hp#, attack = #attack#, phyDefense = #phyDefense#, magDefense = #magDefense#, hpChange = #hpChange#,
+		attackChange = #attackChange#, phyDefenseChange = #phyDefenseChange#, magDefenseChange = #magDefenseChange#, fosterCount = #fosterCount#
+		WHERE 
+		roleId=#roleId# AND cardId=#cardId#
+	</update>
+
+    <delete id="deleteFosterBean" parameterClass="fosterBean">
+		DELETE FROM
+		t_game_role_foster WHERE roleId = #roleId# AND cardId = #cardId#
+    </delete>
+
+    <select id="getFosterBeanList" parameterClass="long" resultClass="fosterBean">
+		<![CDATA[
+
+		SELECT roleId AS roleId, cardId AS cardId, hp AS hp, attack AS attack, phyDefense AS phyDefense, magDefense AS magDefense,
+		 hpChange AS hpChange, attackChange AS attackChange, phyDefenseChange AS phyDefenseChange, magDefenseChange AS magDefenseChange, fosterCount AS fosterCount
+		FROM t_game_role_foster WHERE roleId = #roleId#
+
+        ]]>
+	</select>
+
+</sqlMap>

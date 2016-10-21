@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GangMemberBean">
+
+	<typeAlias alias="gangMemberBean" type="com.linekong.dao.sql.logic.gangmember.GangMemberBean" />
+
+	<insert id="addGangMemberBean" parameterClass="gangMemberBean">
+	    INSERT INTO 
+		t_game_gang_member 
+		(roleId,gangId,duty,joinTime,rewardInfo,todayHonor,totalHonor,todayMaxDamage,dailyBuyInfo,stageRewardInfo)
+		VALUES 
+		(#roleId#,#gangId#,#duty#,#joinTime#,#rewardInfo#,#todayHonor#,#totalHonor#,#todayMaxDamage#,#dailyBuyInfo#,#stageRewardInfo#)
+	</insert>
+
+	<select id="getGangMemberBeanList" parameterClass="long" resultClass="gangMemberBean">
+		SELECT 
+		roleId AS roleId, gangId AS gangId, duty AS duty, joinTime AS joinTime, rewardInfo AS rewardInfo, todayHonor AS todayHonor, totalHonor AS totalHonor, todayMaxDamage AS todayMaxDamage, dailyBuyInfo AS dailyBuyInfo, stageRewardInfo AS stageRewardInfo
+		FROM t_game_gang_member 
+		WHERE gangId=#gangId#
+	</select>
+
+	<update id="updateGangMemberBean" parameterClass="gangMemberBean">
+	    UPDATE
+		t_game_gang_member 
+		SET gangId = #gangId#, duty = #duty#, rewardInfo = #rewardInfo#, todayHonor = #todayHonor#, totalHonor = #totalHonor#, todayMaxDamage = #todayMaxDamage#, dailyBuyInfo = #dailyBuyInfo#, stageRewardInfo = #stageRewardInfo#
+		WHERE 
+		roleId=#roleId#
+	</update>
+	
+	<delete id="deleteGangMemberBean" parameterClass="gangMemberBean">
+	    DELETE FROM
+		t_game_gang_member WHERE roleId=#roleId#
+	</delete>
+</sqlMap>

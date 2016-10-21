@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ActivityChargeBean">
+
+    <typeAlias alias="activityChargeBean" type="com.linekong.dao.sql.logic.activitycharge.ActivityChargeBean" />
+
+    <insert id="addActivityChargeBean" parameterClass="activityChargeBean">
+        INSERT INTO
+        t_game_role_activity_charge
+        (PKId, gameAreaId, roleId, activityType, activityPkId, tabId, guId, chargeCount, chargeTotalRmb)
+        VALUES
+        (#PKId#, #gameAreaId#, #roleId#, #activityType#, #activityPkId#, #tabId#, #guId#, #chargeCount#, #chargeTotalRmb#)
+    </insert>
+
+    <update id="updateActivityChargeBean" parameterClass="activityChargeBean">
+        UPDATE
+        t_game_role_activity_charge
+        SET PKId = #PKId#, gameAreaId = #gameAreaId#, roleId = #roleId#, activityType = #activityType#, activityPkId = #activityPkId#, tabId = #tabId#, guId = #guId#, chargeCount = #chargeCount#, chargeTotalRmb = #chargeTotalRmb#
+        WHERE
+        PKId = #PKId#
+    </update>
+
+    <delete id="deleteActivityChargeBean" parameterClass="activityChargeBean">
+        DELETE FROM
+        t_game_role_activity_charge WHERE PKId = #PKId#
+    </delete>
+
+    <select id="getActivityChargeBeanList" parameterClass="java.util.Map" resultClass="activityChargeBean">
+        <![CDATA[
+        SELECT PKId AS PKId, gameAreaId AS gameAreaId, roleId AS roleId, activityType AS activityType, activityPkId AS activityPkId, tabId AS tabId, guId AS guId, chargeCount AS chargeCount, chargeTotalRmb AS chargeTotalRmb
+        FROM  
+        t_game_role_activity_charge
+        WHERE
+        roleId=#roleId# AND activityType=#activityType# AND activityPkId=#activityPkId# AND tabId=#tabId#
+        ]]>
+    </select>
+
+</sqlMap>

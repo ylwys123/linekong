@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GrainRecordBean">
+
+    <typeAlias alias="grainRecordBean" type="com.linekong.dao.sql.logic.grainrecord.GrainRecordBean" />
+
+    <insert id="addGrainRecordBean" parameterClass="grainRecordBean">
+        INSERT INTO
+        t_game_role_grain_record
+        (pkId, gameAreaId, roleId, robRoleId, robedMovableGrain, robedFastenGrain)
+        VALUES
+        (#pkId#, #gameAreaId#, #roleId#, #robRoleId#, #robedMovableGrain#, #robedFastenGrain#)
+    </insert>
+
+    <update id="updateGrainRecordBean" parameterClass="grainRecordBean">
+        UPDATE
+        t_game_role_grain_record
+        SET pkId = #pkId#, gameAreaId = #gameAreaId#, roleId = #roleId#, robRoleId = #robRoleId#, robedMovableGrain = #robedMovableGrain#, robedFastenGrain = #robedFastenGrain#
+        WHERE
+        pkId = #pkId# AND roleId = #roleId#
+    </update>
+
+    <delete id="deleteGrainRecordBean" parameterClass="grainRecordBean">
+        DELETE FROM
+        t_game_role_grain_record WHERE pkId = #pkId# AND roleId = #roleId#
+    </delete>
+
+    <select id="getGrainRecordBeanList" parameterClass="long" resultClass="grainRecordBean">
+        <![CDATA[
+        SELECT pkId AS pkId, gameAreaId AS gameAreaId, roleId AS roleId, robRoleId AS robRoleId, robedMovableGrain AS robedMovableGrain, robedFastenGrain AS robedFastenGrain
+        FROM  
+        t_game_role_grain_record
+        WHERE
+        roleId=#roleId#
+        ]]>
+    </select>
+
+</sqlMap>
